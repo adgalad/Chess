@@ -64,6 +64,14 @@ void board::fillBoard()
         space[pWhite[i].x][pWhite[i].y] = &pWhite[i];
         space[pBlack[i].x][pBlack[i].y] = &pBlack[i];
     }
+    for (int i =0; i < BSIZE; i++)
+    {
+        for(int j=0 ; j < BSIZE; j++)
+        {
+            ts[i][j][THREAT] = 0;
+            ts[i][j][SAVE]   = 0;
+        }
+    }
 }
 
 void board::printboard()
@@ -115,23 +123,23 @@ void board::printboard()
     {
     
             printf("%c%d %d,%d    ",pBlack[i].x+97,pBlack[i].y+1,
-                   (ts[pBlack[i].x][pBlack[i].y]),
-                   (ts[pBlack[i].x][pBlack[i].y]));
+                   (ts[pBlack[i].x][pBlack[i].y][THREAT]),
+                   (ts[pBlack[i].x][pBlack[i].y][SAVE]));
         
 
             printf("%c%d %d,%d    ",pBlack[8+i].x+97,pBlack[8+i].y+1,
-                   (ts[pBlack[8+i].x][pBlack[8+i].y]),
-                   (ts[pBlack[8+i].x][pBlack[8+i].y]));
+                   (ts[pBlack[8+i].x][pBlack[8+i].y][THREAT]),
+                   (ts[pBlack[8+i].x][pBlack[8+i].y][SAVE]));
         
 
             printf("%c%d %d,%d    ",pWhite[i].x+97,pWhite[i].y+1,
-                   (ts[pWhite[i].x][pWhite[i].y]),
-                   (ts[pWhite[i].x][pWhite[i].y]));
+                   (ts[pWhite[i].x][pWhite[i].y][THREAT]),
+                   (ts[pWhite[i].x][pWhite[i].y][SAVE]));
         
 
             printf("%c%d %d,%d\n",pWhite[8+i].x+97,pWhite[8+i].y+1,
-                   (ts[pWhite[8+i].x][pWhite[8+i].y]),
-                   (ts[pWhite[8+i].x][pWhite[8+i].y]));
+                   (ts[pWhite[8+i].x][pWhite[8+i].y][THREAT]),
+                   (ts[pWhite[8+i].x][pWhite[8+i].y][SAVE]));
         
     }
 }

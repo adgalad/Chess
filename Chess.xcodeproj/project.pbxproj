@@ -7,10 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0766FE0E1A2AF21000D9F08B /* mvtree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0766FE0C1A2AF21000D9F08B /* mvtree.cpp */; };
 		0766FE111A2AF26C00D9F08B /* board.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0766FE0F1A2AF26C00D9F08B /* board.cpp */; };
-		07AC0EB61A2A4D3400418DA2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07AC0EB51A2A4D3400418DA2 /* main.cpp */; };
 		07AC0EC21A2A4F8B00418DA2 /* chessmen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07AC0EC01A2A4F8B00418DA2 /* chessmen.cpp */; };
+		07B8CD751A3B9AF70026C9F5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07B8CD741A3B9AF70026C9F5 /* main.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,15 +25,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0766FE0C1A2AF21000D9F08B /* mvtree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mvtree.cpp; sourceTree = "<group>"; };
-		0766FE0D1A2AF21000D9F08B /* mvtree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mvtree.h; sourceTree = "<group>"; };
 		0766FE0F1A2AF26C00D9F08B /* board.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = board.cpp; sourceTree = SOURCE_ROOT; };
 		0766FE101A2AF26C00D9F08B /* board.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = board.h; sourceTree = SOURCE_ROOT; };
 		07AC0EB21A2A4D3300418DA2 /* Chess */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Chess; sourceTree = BUILT_PRODUCTS_DIR; };
-		07AC0EB51A2A4D3400418DA2 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		07AC0EBF1A2A4E2200418DA2 /* chessHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = chessHeader.h; path = ../chessHeader.h; sourceTree = "<group>"; };
 		07AC0EC01A2A4F8B00418DA2 /* chessmen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = chessmen.cpp; path = ../chessmen.cpp; sourceTree = "<group>"; };
 		07AC0EC11A2A4F8B00418DA2 /* chessmen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = chessmen.h; path = ../chessmen.h; sourceTree = "<group>"; };
+		07B8CD741A3B9AF70026C9F5 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,7 +75,6 @@
 			children = (
 				07AC0EBF1A2A4E2200418DA2 /* chessHeader.h */,
 				07AC0EC11A2A4F8B00418DA2 /* chessmen.h */,
-				0766FE0D1A2AF21000D9F08B /* mvtree.h */,
 				0766FE101A2AF26C00D9F08B /* board.h */,
 			);
 			name = header;
@@ -87,10 +83,9 @@
 		07AC0EC41A2A52BA00418DA2 /* source */ = {
 			isa = PBXGroup;
 			children = (
-				0766FE0C1A2AF21000D9F08B /* mvtree.cpp */,
 				0766FE0F1A2AF26C00D9F08B /* board.cpp */,
 				07AC0EC01A2A4F8B00418DA2 /* chessmen.cpp */,
-				07AC0EB51A2A4D3400418DA2 /* main.cpp */,
+				07B8CD741A3B9AF70026C9F5 /* main.cpp */,
 			);
 			name = source;
 			sourceTree = "<group>";
@@ -152,9 +147,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				0766FE111A2AF26C00D9F08B /* board.cpp in Sources */,
-				07AC0EB61A2A4D3400418DA2 /* main.cpp in Sources */,
-				0766FE0E1A2AF21000D9F08B /* mvtree.cpp in Sources */,
 				07AC0EC21A2A4F8B00418DA2 /* chessmen.cpp in Sources */,
+				07B8CD751A3B9AF70026C9F5 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
