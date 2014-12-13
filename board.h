@@ -13,6 +13,11 @@
 #include "chessmen.h"
 using namespace std;
 
+typedef struct{
+    char mv[4];
+    int max;
+}cpmv;
+
 class board {
 public:
     ChessPiece *space[BSIZE][BSIZE];
@@ -20,7 +25,7 @@ public:
     vector<ChessPiece> pWhite;
     vector<ChessPiece> pBlack;
     int threat;
-    bool pl;
+    bool pl; // true player, false cp
     int  ccmd[4];
     
 public:
@@ -32,11 +37,14 @@ public:
     int  command();
     int mvpiece();
     int threatTo(ChessPiece *piece);
+    int fcpmv();
     
 };
 
 ChessPiece newPiece(int type, int x, int y);
 
 int cpBoard(board *from, board *to);
+
+cpmv mvtree(board *b,int n);
 
 #endif /* defined(__Chess__board__) */

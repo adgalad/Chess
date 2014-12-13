@@ -14,6 +14,8 @@
 #include <math.h>
 #include <string>
 #include <vector>
+#include <SDL/SDL.h>
+#include <SDL_image/SDL_image.h>
 #include <iostream>
 
 #define BSIZE 8
@@ -28,7 +30,7 @@
 #define KING     64     // 7
 #define INGAME   128    // 8
 #define VALUE    256    // 9
-    #define VALUEP
+    #define VALUEP 0xf00
 /* END_TYPE */
 
 #define THREAT 0

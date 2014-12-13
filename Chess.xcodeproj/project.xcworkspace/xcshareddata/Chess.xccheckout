@@ -12,6 +12,8 @@
 	<dict>
 		<key>18ADB8DABAC4E15D1C947C6609D9E802111AC7AC</key>
 		<string>https://github.com/adgalad/Chess.git</string>
+		<key>AB8E856B16BC5C4F6E9018F3F95FA9FDBC5864F5</key>
+		<string>https://github.com/adgalad/Game.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Chess.xcodeproj</string>
@@ -19,6 +21,8 @@
 	<dict>
 		<key>18ADB8DABAC4E15D1C947C6609D9E802111AC7AC</key>
 		<string>../..</string>
+		<key>AB8E856B16BC5C4F6E9018F3F95FA9FDBC5864F5</key>
+		<string>../../../Juego_SDL/Game</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/adgalad/Chess.git</string>
@@ -35,6 +39,14 @@
 			<string>18ADB8DABAC4E15D1C947C6609D9E802111AC7AC</string>
 			<key>IDESourceControlWCCName</key>
 			<string>Chess</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>AB8E856B16BC5C4F6E9018F3F95FA9FDBC5864F5</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Game</string>
 		</dict>
 	</array>
 </dict>

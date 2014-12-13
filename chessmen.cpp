@@ -20,11 +20,14 @@ int ChessPiece::mvp(char X, char Y, bool pl, bool eat)
     
     if (type & PAWN)
     {
-        if (not((!eat && X == x  && ((  (Y == y+1 || (y == 1 && Y == 3)) && pl)
-                                  || ((Y == y-1 || (y == 6 && Y == 4))&& !pl)))
+        
+        if (not((!eat && X == x &&(((Y == y+1 || (y == 1 && Y == 3)) &&  pl)
+                                || ((Y == y-1 || (y == 6 && Y == 4)) && !pl)))
                 ||(eat && abs(x-X)==1 && ((pl && Y == y+1)||(!pl && Y == y-1)))
-            ))
+                ))
+        {
             return false;
+        }
     }
     else if (type & KNIGHT){
         
@@ -52,7 +55,7 @@ int ChessPiece::mvp(char X, char Y, bool pl, bool eat)
            )
         return false;
     }
-    else if (type & KING && not(abs(X-x) <= 1 && abs(Y-y) <= 1))
+    else if ((type & KING) && not(abs(X-x) <= 1 && abs(Y-y) <= 1))
     {
         return false;
     }

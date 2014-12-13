@@ -8,21 +8,29 @@
 
 #include "board.h"
 
-int main()
+int SDL_main (int argc, char **argv)
 {
+
     board b = board();
     board b1 = board();
-    
     b.fillBoard();
     b.fillTS();
     b.printboard();
     while (true)
     {
-        b.command();
-        if (b.ccmd[0]=='x') return 0;
-        b.mvpiece();
+        do
+        {
+            while(!b.command());
+            if (b.ccmd[0]=='x') return 0;
+        }while(b.mvpiece() == -1);
         b.fillTS();
         b.printboard();
+        b.fcpmv();
+        b.fillTS();
+        printf("A:%d, x=%d, Y=%d, nx=%d, ny=%d\n",b.pl,b.ccmd[0],b.ccmd[1],b.ccmd[2],b.ccmd[3]);
+        b.mvpiece();
+        b.printboard();
+        b.pl = !b.pl;
     }
     return 0;
 }

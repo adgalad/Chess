@@ -81,8 +81,10 @@ void board::printboard()
     {
         printf("--");
     }
+    
     string c = "";
-    printf("-+\n");
+    printf("-+");
+    printf("     +-------------------------------------------------+\n");
     for(int i = BSIZE -1 ; i >= 0 ; i--)
     { printf("%d | ",i+1);
         for(int j = 0 ; j < BSIZE ; j++)
@@ -105,6 +107,15 @@ void board::printboard()
             else
                 printf(". ");
         }
+        printf("|   %d | ",i+1);
+        for(int j = 0 ; j < BSIZE ; j ++)
+        {
+            if (ts[j][i][0] < 0) printf("%d," ,ts[j][i][0]);
+            else                 printf(" %d,",ts[j][i][0]);
+            
+            if (ts[j][i][1] < 0) printf("%d|" ,ts[j][i][1]);
+            else                 printf(" %d|",ts[j][i][1]);
+        }
         printf("|\n");
     }
     printf("  +");
@@ -113,35 +124,18 @@ void board::printboard()
         printf("--");
     }
     
-    printf("-+\n    ");
+    printf("-+    ");
+    printf(" +-------------------------------------------------+\n    ");
     for(int i = 0 ;i <BSIZE ; i++)
     {
         printf("%c ",65+i);
     }
-    printf("\n");
-    for(int i = 0 ; i < 8 ; i ++)
+    printf("        ");
+    for(int i = 0 ;i <BSIZE ; i++)
     {
-    
-            printf("%c%d %d,%d    ",pBlack[i].x+97,pBlack[i].y+1,
-                   (ts[pBlack[i].x][pBlack[i].y][THREAT]),
-                   (ts[pBlack[i].x][pBlack[i].y][SAVE]));
-        
-
-            printf("%c%d %d,%d    ",pBlack[8+i].x+97,pBlack[8+i].y+1,
-                   (ts[pBlack[8+i].x][pBlack[8+i].y][THREAT]),
-                   (ts[pBlack[8+i].x][pBlack[8+i].y][SAVE]));
-        
-
-            printf("%c%d %d,%d    ",pWhite[i].x+97,pWhite[i].y+1,
-                   (ts[pWhite[i].x][pWhite[i].y][THREAT]),
-                   (ts[pWhite[i].x][pWhite[i].y][SAVE]));
-        
-
-            printf("%c%d %d,%d\n",pWhite[8+i].x+97,pWhite[8+i].y+1,
-                   (ts[pWhite[8+i].x][pWhite[8+i].y][THREAT]),
-                   (ts[pWhite[8+i].x][pWhite[8+i].y][SAVE]));
-        
+        printf("   %c  ",65+i);
     }
+    printf("\n");
 }
 
 int board::command()
@@ -193,21 +187,22 @@ int board::command()
 int board::mvpiece()
 {
     if (space[ccmd[0]][ccmd[1]] == NULL) {
-        printf("No hay pieza en esta casilla\n");
+      //  printf("No hay pieza en esta casilla\n");
         return 0;
     }
     ChessPiece *to = space[ccmd[2]][ccmd[3]];
     bool eat = false;
     if (to != NULL)
     {
-        if( (pl && (to->type & ISBLACK)) || !(pl || (to->type & ISBLACK)))
+        if((space[ccmd[0]][ccmd[1]]->type & ISBLACK)!=(to->type & ISBLACK))
         {
             eat = true;
         }
         else
         {
-            printf("Error, casilla no vacia.\n");
-            return 0;
+            //if (pl)
+                //printf("Error, casilla no vacia.\n");
+            return -1;
         }
     }
     
@@ -220,17 +215,17 @@ int board::mvpiece()
         space[ccmd[0]][ccmd[1]] = NULL;
         if (eat)
         {
-            if (pl) {
-                to->type = to->type & ~INGAME;
-            }
+            printf("hola");
+            to->type = to->type & ~INGAME;
+            return to->type & VALUEP;
         }
-        return 1;
+        return 0;
     }
     else
     {
-        printf("No se puede mover la pieza de esa forma.\n");
+        //printf("No se puede mover la pieza de esa forma.\n");
     }
-    return 0;
+    return -1;
 }
 
 int board::threatTo(ChessPiece *piece)
@@ -249,21 +244,20 @@ int board::threatTo(ChessPiece *piece)
             int ny = piece->y + mv[i+1];
             if ( 0<= nx && nx < 8 && 0 <= ny && ny < 8)
             {
-                if (space[nx][ny] != NULL)
-                {
-                    if(space[nx][ny] != NULL &&
+                
+                if(space[nx][ny] != NULL &&
                   (space[nx][ny]->type & ISBLACK)!=(piece->type & ISBLACK))
+                {
+                    ts[nx][ny][!(piece->type & ISBLACK)]--;
+                    if ((space[nx][ny]->type & VALUE) > max )
                     {
-                        ts[nx][ny][THREAT]++;
-                        if ((space[nx][ny]->type & VALUE) > max )
-                        {
-                            max = (space[nx][ny]->type & VALUE);
-                        }
+                        max = (space[nx][ny]->type & VALUE);
                     }
-                    else
-                    {
-                        ts[nx][ny][SAVE]++;
-                    }
+                }
+                else
+                {
+                    
+                    ts[nx][ny][!(piece->type & ISBLACK)]++;
                 }
             }
         }
@@ -272,7 +266,7 @@ int board::threatTo(ChessPiece *piece)
     }
     else if(piece->type & KNIGHT)
     {
-        int mv[16] = {1,3,1,-3,-1,3,-1,-3,3,1,3,-1,-3,1,-3,-1};
+        int mv[16] = {1,2,1,-2,-1,2,-1,-2,2,1,2,-1,-2,1,-2,-1};
         int nx,ny;
         for (int i = 0 ; i < 16 ; i+=2)
         {
@@ -282,17 +276,17 @@ int board::threatTo(ChessPiece *piece)
             {
                if(space[nx][ny] != NULL &&
                   (space[nx][ny]->type & ISBLACK)!=(piece->type & ISBLACK))
+                {
+                    ts[nx][ny][!(piece->type & ISBLACK)]--;
+                    if ((space[nx][ny]->type & VALUE) > max )
                     {
-                        ts[nx][ny][THREAT]++;
-                        if ((space[nx][ny]->type & VALUE) > max )
-                        {
-                            max = (space[nx][ny]->type & VALUE);
-                        }
+                        max = (space[nx][ny]->type & VALUE);
                     }
-                    else
-                    {
-                        ts[nx][ny][SAVE]++;
-                    }
+                }
+                else
+                {
+                    ts[nx][ny][!(piece->type & ISBLACK)]++;
+                }
             }
         }
     }
@@ -311,7 +305,7 @@ int board::threatTo(ChessPiece *piece)
                     if(space[nx][ny] != NULL &&
                   (space[nx][ny]->type & ISBLACK)!=(piece->type & ISBLACK))
                     {
-                        ts[nx][ny][THREAT]++;
+                        ts[nx][ny][!(piece->type & ISBLACK)]--;
                         if ((space[nx][ny]->type & VALUE) > max )
                         {
                             max = (space[nx][ny]->type & VALUE);
@@ -319,10 +313,11 @@ int board::threatTo(ChessPiece *piece)
                     }
                     else
                     {
-                        ts[nx][ny][SAVE]++;
+                        ts[nx][ny][!(piece->type & ISBLACK)]++;
                     }
                     break;
                 }
+                ts[nx][ny][!(piece->type & ISBLACK)]++;
                 nx+=mv[i];
                 ny+=mv[i+1];
             }
@@ -342,7 +337,7 @@ int board::threatTo(ChessPiece *piece)
                     if(space[nx][ny] != NULL &&
                   (space[nx][ny]->type & ISBLACK)!=(piece->type & ISBLACK))
                     {
-                        ts[nx][ny][THREAT]++;
+                        ts[nx][ny][!(piece->type & ISBLACK)]--;
                         if ((space[nx][ny]->type & VALUE) > max )
                         {
                             max = (space[nx][ny]->type & VALUE);
@@ -350,10 +345,11 @@ int board::threatTo(ChessPiece *piece)
                     }
                     else
                     {
-                        ts[nx][ny][SAVE]++;
+                        ts[nx][ny][!(piece->type & ISBLACK)]++;
                     }
                     break;
                 }
+                ts[nx][ny][!(piece->type & ISBLACK)]++;
                 nx+=mv[i];
                 ny+=mv[i+1];
             }
@@ -374,7 +370,7 @@ int board::threatTo(ChessPiece *piece)
                     if(space[nx][ny] != NULL &&
                   (space[nx][ny]->type & ISBLACK)!=(piece->type & ISBLACK))
                     {
-                        ts[nx][ny][THREAT]++;
+                        ts[nx][ny][!(piece->type & ISBLACK)]--;
                         if ((space[nx][ny]->type & VALUE) > max )
                         {
                             max = (space[nx][ny]->type & VALUE);
@@ -382,10 +378,11 @@ int board::threatTo(ChessPiece *piece)
                     }
                     else
                     {
-                        ts[nx][ny][SAVE]++;
+                        ts[nx][ny][!(piece->type & ISBLACK)]++;
                     }
                     break;
                 }
+                ts[nx][ny][!(piece->type & ISBLACK)]++;
                 nx+=mv[i];
                 ny+=mv[i+1];
             }
@@ -404,7 +401,7 @@ int board::threatTo(ChessPiece *piece)
                if(space[nx][ny] != NULL &&
                   (space[nx][ny]->type & ISBLACK)!=(piece->type & ISBLACK))
                     {
-                        ts[nx][ny][THREAT]++;
+                        ts[nx][ny][!(piece->type & ISBLACK)]--;
                         if ((space[nx][ny]->type & VALUE) > max )
                         {
                             max = (space[nx][ny]->type & VALUE);
@@ -412,7 +409,7 @@ int board::threatTo(ChessPiece *piece)
                     }
                     else
                     {
-                        ts[nx][ny][SAVE]++;
+                        ts[nx][ny][!(piece->type & ISBLACK)]++;
                     }
             }
         }
@@ -430,7 +427,7 @@ void board::fillTS()
             ts[i][j][SAVE]   = 0;
         }
     }
-    for (int i = 0; i < BSIZE; i++) {
+    for (int i = 0; i < BSIZE*2; i++) {
         threatTo(&pBlack[i]);
         threatTo(&pWhite[i]);
     }
@@ -439,7 +436,7 @@ int cpBoard(board *from, board *to)
 {
     to->pBlack = from->pBlack;
     to->pWhite = from->pWhite;
-    to->pl = !from->pl;
+    to->pl     = from->pl;
     for(int i = 0 ; i < BSIZE ; i++)
         for ( int j = 0 ; j < BSIZE ; j++)
             to->space[i][j] = NULL;
@@ -459,3 +456,319 @@ int cpBoard(board *from, board *to)
     return 1;
 }
 
+cpmv mvtree(board *b, int n)
+{
+    cpmv res;
+    res.max=-1;
+    int am;
+    ChessPiece *piece = NULL;
+    
+    b->pl = !b->pl;
+    for (int i = 0; i < BSIZE*2; i++) {
+        do
+        {
+            piece = &(b->pl?b->pWhite[i]:b->pBlack[i]);
+        }while(piece == NULL);
+        
+        if(piece->type & PAWN)
+        {
+            int mv[8];
+            int np = (b->pl &&piece->y==1) || (!b->pl && piece->y==6) ? 6:8;
+            mv[0] = 1;
+            mv[2] = -1;
+            mv[4] = 0;
+            mv[6] = 0;
+            
+            if (!b->pl)
+            {
+                mv[1] = mv[3] = mv[5] = -1;
+                mv[7] = -2;
+            }
+            else
+            {
+                mv[1] = mv[3] = mv[5] =  1;
+                mv[7] = 2;
+            }
+            for (int i = 0 ; i < np ; i+=2)
+            {
+                int nx = piece->x + mv[i];
+                int ny = piece->y + mv[i+1];
+                if ( 0<= nx && nx < 8 && 0 <= ny && ny < 8)
+                {
+                    if (b->ts[nx][ny][!(piece->type&ISBLACK)] >= 0) {
+                        board b1 = board();
+                        cpmv aux;
+                        cpBoard(b,&b1);
+                        b1.ccmd[0] = piece->x;
+                        b1.ccmd[1] = piece->y;
+                        b1.ccmd[2] = nx;
+                        b1.ccmd[3] = ny;
+                        am = b1.mvpiece();
+                        if (n <= 3 && am >= 0)
+                        {
+                            b1.fillTS();
+                            //printf("(%d > %d)\n",am,res.max);
+                            //b1.printboard();
+                            aux = mvtree(&b1,n+1);
+                            res.max += aux.max;
+                        }
+                        if (am > res.max)
+                        {
+                            res.max = am;
+                            res.mv[0] = piece->x;
+                            res.mv[1] = piece->y;
+                            res.mv[2] = nx;
+                            res.mv[3] = ny;
+
+                        }
+                    }
+                }
+            }
+        }
+        else if(piece->type & KNIGHT)
+        {
+            int mv[16] = {1,2,1,-2,-1,2,-1,-2,2,1,2,-1,-2,1,-2,-1};
+            int nx,ny;
+            for (int i = 0 ; i < 16 ; i+=2)
+            {
+                nx = piece->x + mv[i];
+                ny = piece->y + mv[i+1];
+                if ( 0<= nx && nx < 8 && 0 <= ny && ny < 8)
+                {
+                    if (b->ts[nx][ny][!(piece->type&ISBLACK)] >= 0) {
+                        board b1 = board();
+                        cpmv aux;
+                        cpBoard(b,&b1);
+                        b1.ccmd[0] = piece->x;
+                        b1.ccmd[1] = piece->y;
+                        b1.ccmd[2] = nx;
+                        b1.ccmd[3] = ny;
+                        am = b1.mvpiece();
+                        if (n <= 3 && am >= 0)
+                        {
+                            b1.fillTS();
+                            //printf("(%d > %d)\n",am,res.max);
+                            //b1.printboard();
+                            aux = mvtree(&b1,n+1);
+                            res.max += aux.max;
+                        }
+                        if (am > res.max)
+                        {
+                            res.max = am;
+                            res.mv[0] = piece->x;
+                            res.mv[1] = piece->y;
+                            res.mv[2] = nx;
+                            res.mv[3] = ny;
+
+                        }
+                    }
+                }
+            }
+        }
+        else if(piece->type & BISHOP)
+        {
+            int nx,ny;
+            int mv[8] = {1,1,-1,1,-1,-1,1,-1};
+            for (int i = 0 ; i < 8 ; i+=2)
+            {
+                nx = piece->x+mv[i];
+                ny = piece->y+mv[i+1];
+                while (0<= nx && nx < 8 && 0 <= ny && ny < 8)
+                {
+                    
+                    if (b->ts[nx][ny][!(piece->type&ISBLACK)] >= 0)
+                    {
+                        board b1 = board();
+                        cpmv aux;
+                        cpBoard(b,&b1);
+                        b1.ccmd[0] = piece->x;
+                        b1.ccmd[1] = piece->y;
+                        b1.ccmd[2] = nx;
+                        b1.ccmd[3] = ny;
+                        am = b1.mvpiece();
+                        if (n <= 3 && am >= 0)
+                        {
+                            b1.fillTS();
+                            //printf("(%d > %d)\n",am,res.max);
+                            //b1.printboard();
+                            aux = mvtree(&b1,n+1);
+                            res.max += aux.max;
+                        }
+                        if (am > res.max)
+                        {
+                            res.max = am;
+                            res.mv[0] = piece->x;
+                            res.mv[1] = piece->y;
+                            res.mv[2] = nx;
+                            res.mv[3] = ny;
+
+                        }
+                    }
+                    if (b->space[nx][ny] != NULL) {
+                        break;
+                    }
+                    nx+=mv[i];
+                    ny+=mv[i+1];
+                }
+
+            }
+        }
+        else if(piece->type & ROOK)
+        {
+            int nx,ny;
+            int mv[8] = {0,1,0,-1,-1,0,1,0};
+            for (int i = 0 ; i < 8 ; i+=2)
+            {
+                nx = piece->x+mv[i];
+                ny = piece->y+mv[i+1];
+                while (0<= nx && nx < 8 && 0 <= ny && ny < 8)
+                {
+                    
+                    if (b->ts[nx][ny][!(piece->type&ISBLACK)] >= 0)
+                    {
+                        board b1 = board();
+                        cpmv aux;
+                        cpBoard(b,&b1);
+                        b1.ccmd[0] = piece->x;
+                        b1.ccmd[1] = piece->y;
+                        b1.ccmd[2] = nx;
+                        b1.ccmd[3] = ny;
+                        am = b1.mvpiece();
+                        if (n <= 3 && am >= 0)
+                        {
+                            b1.fillTS();
+                            //printf("(%d > %d)\n",am,res.max);
+                            //b1.printboard();
+                            aux = mvtree(&b1,n+1);
+                            res.max += aux.max;
+                        }
+                        if (am > res.max)
+                        {
+                            res.max = am;
+                            res.mv[0] = piece->x;
+                            res.mv[1] = piece->y;
+                            res.mv[2] = nx;
+                            res.mv[3] = ny;
+
+                        }
+                    }
+                    if (b->space[nx][ny] != NULL) {
+                        break;
+                    }
+                    nx+=mv[i];
+                    ny+=mv[i+1];
+                }
+
+            }
+        }
+        else if(piece->type & QUEEN)
+        {
+            int nx,ny;
+            int mv[16] = {1,1,-1,1,-1,-1,1,-1,0,1,0,-1,-1,0,1,0};
+            for (int i = 0 ; i < 16 ; i+=2)
+            {
+                nx = piece->x+mv[i];
+                ny = piece->y+mv[i+1];
+                while (0<= nx && nx < 8 && 0 <= ny && ny < 8)
+                {
+
+                    if (b->ts[nx][ny][!(piece->type&ISBLACK)] >= 0)
+                    {
+                        board b1 = board();
+                        cpmv aux;
+                        cpBoard(b,&b1);
+                        b1.ccmd[0] = piece->x;
+                        b1.ccmd[1] = piece->y;
+                        b1.ccmd[2] = nx;
+                        b1.ccmd[3] = ny;
+                        am = b1.mvpiece();
+                        if (n <= 3 && am >= 0)
+                        {
+                            b1.fillTS();
+                            //printf("(%d > %d)\n",am,res.max);
+                            //b1.printboard();
+                            aux = mvtree(&b1,n+1);
+                            res.max += aux.max;
+                        }
+                        if (am > res.max)
+                        {
+                            res.max = am;
+                            res.mv[0] = piece->x;
+                            res.mv[1] = piece->y;
+                            res.mv[2] = nx;
+                            res.mv[3] = ny;
+
+                        }
+                    }
+                    if (b->space[nx][ny] != NULL) {
+                        break;
+                    }
+                    nx+=mv[i];
+                    ny+=mv[i+1];
+                }
+            }
+        }
+        else if(piece->type & KING)
+        {
+            int mv[16] = {1,1,-1,1,-1,-1,1,-1,0,1,0,-1,-1,0,1,0};
+            int nx,ny;
+            for (int i = 0 ; i < 16 ; i+=2)
+            {
+                nx = piece->x + mv[i];
+                ny = piece->y + mv[i+1];
+                if ( 0<= nx && nx < 8 && 0 <= ny && ny < 8)
+                {
+                    if (b->ts[nx][ny][!(piece->type&ISBLACK)] >= 0) {
+                        board b1 = board();
+                        cpmv aux;
+                        cpBoard(b,&b1);
+                        b1.ccmd[0] = piece->x;
+                        b1.ccmd[1] = piece->y;
+                        b1.ccmd[2] = nx;
+                        b1.ccmd[3] = ny;
+                        am = b1.mvpiece();
+                        if (n <= 3 && am >= 0)
+                        {
+                            b1.fillTS();
+                            //printf("(%d > %d)\n",am,res.max);
+                            //b1.printboard();
+                            aux = mvtree(&b1,n+1);
+                            res.max += aux.max;
+                        }
+                        if (am > res.max)
+                        {
+                            res.max = am;
+                            res.mv[0] = piece->x;
+                            res.mv[1] = piece->y;
+                            res.mv[2] = nx;
+                            res.mv[3] = ny;
+
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return res;
+}
+
+int board::fcpmv()
+{
+    cpmv res;
+    res.mv[0] = -1;
+    res.mv[1] = -1;
+    res.mv[2] = -1;
+    res.mv[3] = -1;
+    res = mvtree(this, 1);
+    if (res.mv[0] == -1 ||
+        res.mv[1] == -1 ||
+        res.mv[2] == -1 ||
+        res.mv[3] == -1)
+        return 0;
+    ccmd[0] = res.mv[0];
+    ccmd[1] = res.mv[1];
+    ccmd[2] = res.mv[2];
+    ccmd[3] = res.mv[3];
+    printf("%d,%d,%d,%d\n",ccmd[0],ccmd[1],ccmd[2],ccmd[3]);
+    return 1;
+}

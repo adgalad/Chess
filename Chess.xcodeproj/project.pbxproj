@@ -10,6 +10,12 @@
 		0766FE111A2AF26C00D9F08B /* board.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0766FE0F1A2AF26C00D9F08B /* board.cpp */; };
 		07AC0EC21A2A4F8B00418DA2 /* chessmen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07AC0EC01A2A4F8B00418DA2 /* chessmen.cpp */; };
 		07B8CD751A3B9AF70026C9F5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07B8CD741A3B9AF70026C9F5 /* main.cpp */; };
+		07EBBD711A3CA60B00BD8978 /* SDLMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 07EBBD701A3CA60B00BD8978 /* SDLMain.m */; };
+		07EBBD731A3CA62400BD8978 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07EBBD721A3CA62400BD8978 /* Cocoa.framework */; };
+		07EBBD751A3CA62900BD8978 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07EBBD741A3CA62900BD8978 /* OpenGL.framework */; };
+		07EBBD781A3CA63A00BD8978 /* SDL_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07EBBD761A3CA63A00BD8978 /* SDL_image.framework */; };
+		07EBBD791A3CA63A00BD8978 /* SDL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07EBBD771A3CA63A00BD8978 /* SDL.framework */; };
+		07EBBD7C1A3CAAD700BD8978 /* chess.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07EBBD7A1A3CAAD700BD8978 /* chess.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -33,6 +39,14 @@
 		07AC0EC11A2A4F8B00418DA2 /* chessmen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = chessmen.h; path = ../chessmen.h; sourceTree = "<group>"; };
 		07B8CD741A3B9AF70026C9F5 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = SOURCE_ROOT; };
 		07BCD20B1A3BA68E00695C49 /* File */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = File; sourceTree = "<group>"; };
+		07EBBD6F1A3CA60B00BD8978 /* SDLMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDLMain.h; sourceTree = SOURCE_ROOT; };
+		07EBBD701A3CA60B00BD8978 /* SDLMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLMain.m; sourceTree = SOURCE_ROOT; };
+		07EBBD721A3CA62400BD8978 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		07EBBD741A3CA62900BD8978 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		07EBBD761A3CA63A00BD8978 /* SDL_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL_image.framework; path = ../../../../SDL_image.framework; sourceTree = "<group>"; };
+		07EBBD771A3CA63A00BD8978 /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL.framework; path = ../../../../SDL.framework; sourceTree = "<group>"; };
+		07EBBD7A1A3CAAD700BD8978 /* chess.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = chess.cpp; sourceTree = "<group>"; };
+		07EBBD7B1A3CAAD700BD8978 /* chess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = chess.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +54,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07EBBD781A3CA63A00BD8978 /* SDL_image.framework in Frameworks */,
+				07EBBD791A3CA63A00BD8978 /* SDL.framework in Frameworks */,
+				07EBBD751A3CA62900BD8978 /* OpenGL.framework in Frameworks */,
+				07EBBD731A3CA62400BD8978 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -49,6 +67,10 @@
 		07AC0EA91A2A4D3300418DA2 = {
 			isa = PBXGroup;
 			children = (
+				07EBBD761A3CA63A00BD8978 /* SDL_image.framework */,
+				07EBBD771A3CA63A00BD8978 /* SDL.framework */,
+				07EBBD741A3CA62900BD8978 /* OpenGL.framework */,
+				07EBBD721A3CA62400BD8978 /* Cocoa.framework */,
 				07AC0EB41A2A4D3300418DA2 /* Chess */,
 				07AC0EB31A2A4D3300418DA2 /* Products */,
 			);
@@ -68,6 +90,7 @@
 				07AC0EC31A2A529E00418DA2 /* header */,
 				07AC0EC41A2A52BA00418DA2 /* source */,
 				07BCD20B1A3BA68E00695C49 /* File */,
+				07EBBD6E1A3CA5EE00BD8978 /* SDL source */,
 			);
 			path = Chess;
 			sourceTree = "<group>";
@@ -78,6 +101,7 @@
 				07AC0EBF1A2A4E2200418DA2 /* chessHeader.h */,
 				07AC0EC11A2A4F8B00418DA2 /* chessmen.h */,
 				0766FE101A2AF26C00D9F08B /* board.h */,
+				07EBBD7B1A3CAAD700BD8978 /* chess.h */,
 			);
 			name = header;
 			sourceTree = "<group>";
@@ -88,8 +112,18 @@
 				0766FE0F1A2AF26C00D9F08B /* board.cpp */,
 				07AC0EC01A2A4F8B00418DA2 /* chessmen.cpp */,
 				07B8CD741A3B9AF70026C9F5 /* main.cpp */,
+				07EBBD7A1A3CAAD700BD8978 /* chess.cpp */,
 			);
 			name = source;
+			sourceTree = "<group>";
+		};
+		07EBBD6E1A3CA5EE00BD8978 /* SDL source */ = {
+			isa = PBXGroup;
+			children = (
+				07EBBD6F1A3CA60B00BD8978 /* SDLMain.h */,
+				07EBBD701A3CA60B00BD8978 /* SDLMain.m */,
+			);
+			name = "SDL source";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,6 +185,8 @@
 				0766FE111A2AF26C00D9F08B /* board.cpp in Sources */,
 				07AC0EC21A2A4F8B00418DA2 /* chessmen.cpp in Sources */,
 				07B8CD751A3B9AF70026C9F5 /* main.cpp in Sources */,
+				07EBBD7C1A3CAAD700BD8978 /* chess.cpp in Sources */,
+				07EBBD711A3CA60B00BD8978 /* SDLMain.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,6 +270,7 @@
 		07AC0EBA1A2A4D3400418DA2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = /Users/carlosspaggiari;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -241,6 +278,7 @@
 		07AC0EBB1A2A4D3400418DA2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = /Users/carlosspaggiari;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
