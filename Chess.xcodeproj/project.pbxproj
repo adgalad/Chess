@@ -32,6 +32,7 @@
 		07AC0EC01A2A4F8B00418DA2 /* chessmen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = chessmen.cpp; path = ../chessmen.cpp; sourceTree = "<group>"; };
 		07AC0EC11A2A4F8B00418DA2 /* chessmen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = chessmen.h; path = ../chessmen.h; sourceTree = "<group>"; };
 		07B8CD741A3B9AF70026C9F5 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = SOURCE_ROOT; };
+		07BCD20B1A3BA68E00695C49 /* File */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = File; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +67,7 @@
 			children = (
 				07AC0EC31A2A529E00418DA2 /* header */,
 				07AC0EC41A2A52BA00418DA2 /* source */,
+				07BCD20B1A3BA68E00695C49 /* File */,
 			);
 			path = Chess;
 			sourceTree = "<group>";

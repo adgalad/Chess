@@ -148,6 +148,11 @@ int board::command()
 {
     string c;
     cin >> c;
+    if (c[0] == 'x')
+    {
+        ccmd[0] = 'x';
+        return 1;
+    }
     if(c.size() != 4) {
         printf("Error en el comando.\n");
         return 0;
@@ -246,9 +251,10 @@ int board::threatTo(ChessPiece *piece)
             {
                 if (space[nx][ny] != NULL)
                 {
-                    if((space[nx][ny]->type & ISBLACK)!=(piece->type & ISBLACK))
+                    if(space[nx][ny] != NULL &&
+                  (space[nx][ny]->type & ISBLACK)!=(piece->type & ISBLACK))
                     {
-                        ts[nx][ny][1]++;
+                        ts[nx][ny][THREAT]++;
                         if ((space[nx][ny]->type & VALUE) > max )
                         {
                             max = (space[nx][ny]->type & VALUE);
@@ -256,7 +262,7 @@ int board::threatTo(ChessPiece *piece)
                     }
                     else
                     {
-                        ts[nx][ny][1]++;
+                        ts[nx][ny][SAVE]++;
                     }
                 }
             }
@@ -274,18 +280,19 @@ int board::threatTo(ChessPiece *piece)
             ny = piece->y + mv[i+1];
             if ( 0<= nx && nx < 8 && 0 <= ny && ny < 8)
             {
-                if((space[nx][ny]->type & ISBLACK)!=(piece->type & ISBLACK))
-                {
-                    ts[nx][ny][1]++;
-                    if ((space[nx][ny]->type & VALUE) > max )
+               if(space[nx][ny] != NULL &&
+                  (space[nx][ny]->type & ISBLACK)!=(piece->type & ISBLACK))
                     {
-                        max = (space[nx][ny]->type & VALUE);
+                        ts[nx][ny][THREAT]++;
+                        if ((space[nx][ny]->type & VALUE) > max )
+                        {
+                            max = (space[nx][ny]->type & VALUE);
+                        }
                     }
-                }
-                else
-                {
-                    ts[nx][ny][1]++;
-                }
+                    else
+                    {
+                        ts[nx][ny][SAVE]++;
+                    }
             }
         }
     }
@@ -301,9 +308,10 @@ int board::threatTo(ChessPiece *piece)
 
                 if (space[nx][ny] != NULL)
                 {
-                    if((space[nx][ny]->type & ISBLACK)!=(piece->type & ISBLACK))
+                    if(space[nx][ny] != NULL &&
+                  (space[nx][ny]->type & ISBLACK)!=(piece->type & ISBLACK))
                     {
-                        ts[nx][ny][1]++;
+                        ts[nx][ny][THREAT]++;
                         if ((space[nx][ny]->type & VALUE) > max )
                         {
                             max = (space[nx][ny]->type & VALUE);
@@ -311,7 +319,7 @@ int board::threatTo(ChessPiece *piece)
                     }
                     else
                     {
-                        ts[nx][ny][1]++;
+                        ts[nx][ny][SAVE]++;
                     }
                     break;
                 }
@@ -331,9 +339,10 @@ int board::threatTo(ChessPiece *piece)
             while (0<= nx && nx < 8 && 0 <= ny && ny < 8) {
                 if (space[nx][ny] != NULL)
                 {
-                    if((space[nx][ny]->type & ISBLACK)!=(piece->type & ISBLACK))
+                    if(space[nx][ny] != NULL &&
+                  (space[nx][ny]->type & ISBLACK)!=(piece->type & ISBLACK))
                     {
-                        ts[nx][ny][1]++;
+                        ts[nx][ny][THREAT]++;
                         if ((space[nx][ny]->type & VALUE) > max )
                         {
                             max = (space[nx][ny]->type & VALUE);
@@ -341,7 +350,7 @@ int board::threatTo(ChessPiece *piece)
                     }
                     else
                     {
-                        ts[nx][ny][1]++;
+                        ts[nx][ny][SAVE]++;
                     }
                     break;
                 }
@@ -359,11 +368,13 @@ int board::threatTo(ChessPiece *piece)
             nx = piece->x+mv[i];
             ny = piece->y+mv[i+1];
             while (0<= nx && nx < 8 && 0 <= ny && ny < 8) {
+                
                 if (space[nx][ny] != NULL)
                 {
-                    if((space[nx][ny]->type & ISBLACK)!=(piece->type & ISBLACK))
+                    if(space[nx][ny] != NULL &&
+                  (space[nx][ny]->type & ISBLACK)!=(piece->type & ISBLACK))
                     {
-                        ts[nx][ny][1]++;
+                        ts[nx][ny][THREAT]++;
                         if ((space[nx][ny]->type & VALUE) > max )
                         {
                             max = (space[nx][ny]->type & VALUE);
@@ -371,7 +382,7 @@ int board::threatTo(ChessPiece *piece)
                     }
                     else
                     {
-                        ts[nx][ny][1]++;
+                        ts[nx][ny][SAVE]++;
                     }
                     break;
                 }
@@ -390,24 +401,40 @@ int board::threatTo(ChessPiece *piece)
             ny = piece->y + mv[i+1];
             if ( 0<= nx && nx < 8 && 0 <= ny && ny < 8)
             {
-                if((space[nx][ny]->type & ISBLACK)!=(piece->type & ISBLACK))
-                {
-                    ts[nx][ny][1]++;
-                    if ((space[nx][ny]->type & VALUE) > max )
+               if(space[nx][ny] != NULL &&
+                  (space[nx][ny]->type & ISBLACK)!=(piece->type & ISBLACK))
                     {
-                        max = (space[nx][ny]->type & VALUE);
+                        ts[nx][ny][THREAT]++;
+                        if ((space[nx][ny]->type & VALUE) > max )
+                        {
+                            max = (space[nx][ny]->type & VALUE);
+                        }
                     }
-                }
-                else
-                {
-                    ts[nx][ny][1]++;
-                }
+                    else
+                    {
+                        ts[nx][ny][SAVE]++;
+                    }
             }
         }
     }
     return 1;
 }
 
+void board::fillTS()
+{
+    for (int i =0; i < BSIZE; i++)
+    {
+        for(int j=0 ; j < BSIZE; j++)
+        {
+            ts[i][j][THREAT] = 0;
+            ts[i][j][SAVE]   = 0;
+        }
+    }
+    for (int i = 0; i < BSIZE; i++) {
+        threatTo(&pBlack[i]);
+        threatTo(&pWhite[i]);
+    }
+}
 int cpBoard(board *from, board *to)
 {
     to->pBlack = from->pBlack;
@@ -420,6 +447,14 @@ int cpBoard(board *from, board *to)
     {
         to->space[to->pWhite[i].x][to->pWhite[i].y] = &to->pWhite[i];
         to->space[to->pBlack[i].x][to->pBlack[i].y] = &to->pBlack[i];
+    }
+    for (int i =0; i < BSIZE; i++)
+    {
+        for(int j=0 ; j < BSIZE; j++)
+        {
+            to->ts[i][j][THREAT] = from->ts[i][j][THREAT];
+            to->ts[i][j][SAVE]   = from->ts[i][j][SAVE];
+        }
     }
     return 1;
 }

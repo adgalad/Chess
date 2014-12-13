@@ -26,10 +26,13 @@ public:
 public:
     board();
     void fillBoard();
+    void fillTS();
     void printboard();
+    
     int  command();
     int mvpiece();
     int threatTo(ChessPiece *piece);
+    
 };
 
 ChessPiece newPiece(int type, int x, int y);
