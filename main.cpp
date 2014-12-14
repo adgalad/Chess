@@ -10,7 +10,6 @@
 
 int SDL_main (int argc, char **argv)
 {
-
     board b = board();
     board b1 = board();
     b.fillBoard();
@@ -26,9 +25,9 @@ int SDL_main (int argc, char **argv)
         b.fillTS();
         b.printboard();
         b.fcpmv();
-        b.fillTS();
         printf("A:%d, x=%d, Y=%d, nx=%d, ny=%d\n",b.pl,b.ccmd[0],b.ccmd[1],b.ccmd[2],b.ccmd[3]);
         b.mvpiece();
+        b.fillTS();
         b.printboard();
         b.pl = !b.pl;
     }

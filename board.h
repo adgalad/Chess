@@ -36,7 +36,7 @@ public:
     
     int  command();
     int mvpiece();
-    int threatTo(ChessPiece *piece);
+    int threatTo(ChessPiece *piece, bool tsb);
     int fcpmv();
     
 };
