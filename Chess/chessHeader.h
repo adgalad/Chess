@@ -12,6 +12,7 @@
 
 #include <cstdio>
 #include <iostream>
+#include <string>
 #include <cstdint>
 #include <vector>
 
@@ -60,6 +61,9 @@ const UINT64 bitPos[64] =
 #define ROOK   5
 #define QUEEN  6
 #define KING   7
+
+#define BLACK 0
+#define WHITE 1
 
 
 #endif

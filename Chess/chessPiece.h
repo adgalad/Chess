@@ -15,11 +15,12 @@ class ChessPiece
 {
 public:
     INT8 type;
+    INT8 color;
     INT8 x;
     INT8 y;
     
     ChessPiece();
-    void initChessPiece(INT8 type, INT8 x, INT8 y);
+    void initChessPiece(INT8 type, INT8 color, INT8 x, INT8 y);
 };
 
 

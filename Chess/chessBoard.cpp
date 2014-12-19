@@ -23,10 +23,10 @@ vector<INT8*> vectorMvInit()
     return aux;
 }
 
-ChessPiece newChessPiece(INT8 type, INT8 x, INT8 y)
+ChessPiece newChessPiece(INT8 type, INT8 color, INT8 x, INT8 y)
 {
     ChessPiece ncp = ChessPiece();
-    ncp.initChessPiece(type, x, y);
+    ncp.initChessPiece(type,color, x, y);
     return ncp;
 }
 
@@ -42,7 +42,7 @@ void imprimir(UINT64 mv, UINT64 board, INT8 x, INT8  y)
     
     
     for (INT8  i = 0; i < 8; i++) {
-        for (INT8  j =0; j < 8; j++) {
+        for (INT8  j = 0; j < 8; j++) {
             if (board & 1 && mv & 1) {
                 c[i][j] = 'V';
             }else {
@@ -54,12 +54,18 @@ void imprimir(UINT64 mv, UINT64 board, INT8 x, INT8  y)
         }
     }
     c[y][x] = 'O';
-    for (INT8  i = 0; i < 8; i++) {
+    printf("  +-----------------+\n");
+    for (INT8  i = 7; i >= 0; i--) {
+        printf("%d | ", i+1);
         for (INT8  j =0; j < 8; j++) {
             printf("%c ",c[i][j]);
         }
-        printf("\n");
+        printf("|\n");
     }
+    printf("  +-----------------+\n    ");
+    for (INT8  i = 0; i < 8; i++)
+        printf("%c ",i+0x41);
+    printf("\n\n");
 }
 
 void ChessBoard::setWhitePieces(UINT64 pieces)
@@ -81,30 +87,30 @@ UINT64 ChessBoard::getBlackPieces()
 
 ChessBoard::ChessBoard()
 {
-    wpArray.push_back(newChessPiece(KING, 4, 0));
-    bpArray.push_back(newChessPiece(KING, 4, 7));
+    wpArray.push_back(newChessPiece(KING,WHITE, 4, 0));
+    bpArray.push_back(newChessPiece(KING,BLACK, 4, 7));
     
-    wpArray.push_back(newChessPiece(QUEEN, 3, 0));
-    bpArray.push_back(newChessPiece(QUEEN, 3, 7));
+    wpArray.push_back(newChessPiece(QUEEN,WHITE, 3, 0));
+    bpArray.push_back(newChessPiece(QUEEN,BLACK, 3, 7));
     
-    wpArray.push_back(newChessPiece(BISHOP, 2, 0));
-    wpArray.push_back(newChessPiece(BISHOP, 5, 0));
-    bpArray.push_back(newChessPiece(BISHOP, 2, 7));
-    bpArray.push_back(newChessPiece(BISHOP, 5, 7));
+    wpArray.push_back(newChessPiece(BISHOP,WHITE, 2, 0));
+    wpArray.push_back(newChessPiece(BISHOP,WHITE, 5, 0));
+    bpArray.push_back(newChessPiece(BISHOP,BLACK, 2, 7));
+    bpArray.push_back(newChessPiece(BISHOP,BLACK, 5, 7));
     
-    wpArray.push_back(newChessPiece(KNIGHT, 1, 0));
-    wpArray.push_back(newChessPiece(KNIGHT, 6, 0));
-    bpArray.push_back(newChessPiece(KNIGHT, 1, 7));
-    bpArray.push_back(newChessPiece(KNIGHT, 6, 7));
+    wpArray.push_back(newChessPiece(KNIGHT,WHITE, 1, 0));
+    wpArray.push_back(newChessPiece(KNIGHT,WHITE, 6, 0));
+    bpArray.push_back(newChessPiece(KNIGHT,BLACK, 1, 7));
+    bpArray.push_back(newChessPiece(KNIGHT,BLACK, 6, 7));
     
-    wpArray.push_back(newChessPiece(ROOK, 0, 0));
-    wpArray.push_back(newChessPiece(ROOK, 7, 0));
-    bpArray.push_back(newChessPiece(ROOK, 0, 7));
-    bpArray.push_back(newChessPiece(ROOK, 7, 7));
+    wpArray.push_back(newChessPiece(ROOK,WHITE, 0, 0));
+    wpArray.push_back(newChessPiece(ROOK,WHITE, 7, 0));
+    bpArray.push_back(newChessPiece(ROOK,BLACK, 0, 7));
+    bpArray.push_back(newChessPiece(ROOK,BLACK, 7, 7));
     
     for (int i = 0 ; i < 8 ; i++) {
-        wpArray.push_back(newChessPiece(WPAWN, i, 1));
-        bpArray.push_back(newChessPiece(BPAWN, i, 6));
+        wpArray.push_back(newChessPiece(WPAWN,WHITE, i, 1));
+        bpArray.push_back(newChessPiece(BPAWN,BLACK, i, 6));
     }
     
     for(int i = 0 ; i < BSIZE*BSIZE ; i++)
@@ -152,7 +158,7 @@ UINT64 ChessBoard::getReach(ChessPiece cp)
                     {
                         bp &= ~bitPos[n];
                     }
-                    mvList[n] = ring[n];
+                    mvList.push_back(ring[n]);
                     n++;
                 }
             }
@@ -166,7 +172,7 @@ UINT64 ChessBoard::getReach(ChessPiece cp)
     {
         n = 0;
         INT8 nmv = lenghtMv[cp.type];
-        if ((cp.type == BPAWN && cp.y == 1) || (cp.type == WPAWN && cp.y == 6))
+        if ((cp.type == BPAWN && cp.y == 6) || (cp.type == WPAWN && cp.y == 1))
         {
             nmv+=2;
         }
@@ -183,7 +189,7 @@ UINT64 ChessBoard::getReach(ChessPiece cp)
                                            )))
                 {
                     bitBoard |= bitPos[ring[n]];
-                    mvList[n] = ring[n];
+                    mvList.push_back(ring[n]);
                 }
                 n++;
             }
@@ -211,7 +217,7 @@ UINT64 ChessBoard::getReach(ChessPiece cp)
                         {
                             bp &= ~bitPos[n];
                         }
-                        mvList[n] = ring[n];
+                        mvList.push_back(ring[n]);
                         n++;
                     }
                 }
@@ -223,7 +229,5 @@ UINT64 ChessBoard::getReach(ChessPiece cp)
             k++;
         }while (bp != 0);
     }
-    
-    mvList[n] = -1;
     return bitBoard;
 }

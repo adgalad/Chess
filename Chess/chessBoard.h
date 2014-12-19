@@ -20,7 +20,7 @@ class ChessBoard
     UINT64 whitePieces;
     UINT64 blackPieces;
     UINT64 passantCapture;
-    UINT8  mvList[MAXMV];
+    vector<INT8> mvList;
     ChessPiece *board[BSIZE*BSIZE];
 
 public:
@@ -41,6 +41,8 @@ public:
     void setBlackPieces(UINT64 pieces);
     UINT64 getWhitePieces();
     UINT64 getBlackPieces();
+    
+    bool playerMv();
     
 };
 

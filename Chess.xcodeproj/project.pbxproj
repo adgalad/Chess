@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		07A521E61A44BFCC008BF435 /* chessPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07A521E51A44BFCC008BF435 /* chessPlayer.cpp */; };
+		07A521E81A44DCAB008BF435 /* chessCPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07A521E71A44DCAB008BF435 /* chessCPlayer.cpp */; };
 		07E147861A426E990076F082 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07E147851A426E990076F082 /* main.cpp */; };
 		07E1478A1A426F4A0076F082 /* chessBoard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07E147881A426F4A0076F082 /* chessBoard.cpp */; };
 		07E1478D1A4271D10076F082 /* chessPiece.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07E1478C1A4271D10076F082 /* chessPiece.cpp */; };
@@ -29,6 +31,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		07A521E51A44BFCC008BF435 /* chessPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = chessPlayer.cpp; sourceTree = "<group>"; };
+		07A521E71A44DCAB008BF435 /* chessCPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = chessCPlayer.cpp; sourceTree = "<group>"; };
 		07AC0EB21A2A4D3300418DA2 /* Chess */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Chess; sourceTree = BUILT_PRODUCTS_DIR; };
 		07BCD20B1A3BA68E00695C49 /* File */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = File; sourceTree = "<group>"; };
 		07E147851A426E990076F082 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
@@ -105,8 +109,10 @@
 			isa = PBXGroup;
 			children = (
 				07E147881A426F4A0076F082 /* chessBoard.cpp */,
+				07A521E51A44BFCC008BF435 /* chessPlayer.cpp */,
 				07E1478C1A4271D10076F082 /* chessPiece.cpp */,
 				07E147851A426E990076F082 /* main.cpp */,
+				07A521E71A44DCAB008BF435 /* chessCPlayer.cpp */,
 			);
 			name = source;
 			sourceTree = "<group>";
@@ -179,6 +185,8 @@
 				07E147861A426E990076F082 /* main.cpp in Sources */,
 				07E1478A1A426F4A0076F082 /* chessBoard.cpp in Sources */,
 				07E1478D1A4271D10076F082 /* chessPiece.cpp in Sources */,
+				07A521E61A44BFCC008BF435 /* chessPlayer.cpp in Sources */,
+				07A521E81A44DCAB008BF435 /* chessCPlayer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
