@@ -22,8 +22,8 @@ typedef int8_t INT8;
 typedef uint8_t UINT8;
 
 const INT8 lenghtMv[8]    = {0,6,6,16,8,8,16,16};
-const INT8 pawnMvBlack[8] = { 0,1 , 1,1 , -1,1 , 0,2};
-const INT8 pawnMvWhite[8] = { 0,-1, 1,-1 ,-1,-1 , 0,-2};
+const INT8 pawnMvBlack[8] = { 0,-1, 1,-1 ,-1,-1 , 0,-2};
+const INT8 pawnMvWhite[8] = { 0,1 , 1,1 , -1,1 , 0,2}; 
 const INT8 knightMv[16]   = {2,1,2,-1,-2,1,-2,-1,1,2,1,-2,-1,2,-1,-2};
 const INT8 bishopMv[8]    = {1,1,1,-1,-1,1,-1,-1};
 const INT8 rookMv[8]      = {0,1,1,0,0,-1,-1,0};

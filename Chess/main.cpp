@@ -6,21 +6,15 @@
 //  Copyright (c) 2014 ARSC. All rights reserved.
 //
 
-#include "chessPiece.h"
+#include "chessBoard.h"
 
 
 int main()
 {
-    PieceGraph a = PieceGraph();
-    UINT64 board = 23002002340001070;
-    INT8 c[MAXMV];
+    ChessBoard a = ChessBoard();
+
     INT8  x= 4;
-    INT8  y= 1;
-    for (UINT64 i = 0; i < 1000000 ; i++)
-    {
-        a.getReach(QUEEN,x,y,c,board);
-    }
-    imprimir(a.getReach(QUEEN,x,y,c,board),board,x,y);
-    
+    imprimir(a.getReach(a.wpArray[x]),a.getBlackPieces()|a.getWhitePieces(),a.wpArray[x].x,a.wpArray[x].y);
+
     return 0;
 }
