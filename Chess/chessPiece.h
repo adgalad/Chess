@@ -13,28 +13,24 @@
 
 
 
-vector<UINT8*> vectorInit(); // Vector initializer funtion
+vector<INT8*> vectorInit(); // Vector initializer funtion
 
-void imprimir(char mvList[56], UINT8  x, UINT8  y);
+void imprimir(UINT64 mv, UINT64 board, INT8  x, INT8  y);
 
 class PieceGraph
 {
-    UINT64 *reach[BSIZE][BSIZE]; // movement graph of each type of piece
-    
 public:
     
     // Class constructor
     PieceGraph();
     
-    // Graph Initializar
-    void initGraph(UINT8 type);
     
     // Get the legal moves of a piece;
-    void getReach(UINT8 x, UINT8 y, UINT8 mvList[MAXMV],UINT64 board);
+    UINT64 getReach(INT8 type, INT8 x, INT8 y, INT8 mvList[MAXMV],UINT64 board);
     
 };
 
-const vector<UINT8*> mvArray = vectorInit(); // vector with the information about the piece's movements
+const vector<INT8*> mvArray = vectorInit(); // vector with the information about the piece's movements
 
 
 

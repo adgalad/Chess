@@ -12,12 +12,15 @@
 int main()
 {
     PieceGraph a = PieceGraph();
-    UINT64 board;
-    a.initGraph(BPAWN);
-    char c[MAXMV];
-    UINT8  x= 4;
-    UINT8  y= 1;
-    a.getReach(x,y,c,board);
-    imprimir(c,x,y);
+    UINT64 board = 23002002340001070;
+    INT8 c[MAXMV];
+    INT8  x= 4;
+    INT8  y= 1;
+    for (UINT64 i = 0; i < 1000000 ; i++)
+    {
+        a.getReach(QUEEN,x,y,c,board);
+    }
+    imprimir(a.getReach(QUEEN,x,y,c,board),board,x,y);
+    
     return 0;
 }

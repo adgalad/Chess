@@ -8,39 +8,48 @@
 
 #include "chessPiece.h"
 
-vector<UINT8*> vectorInit()
+vector<INT8*> vectorInit()
 {
-    std::vector<UINT8*> aux;
+    std::vector<INT8*> aux;
     aux.push_back(NULL);
-    aux.push_back((UINT8*)pawnMvWhite);
-    aux.push_back((UINT8*)pawnMvBlack);
-    aux.push_back((UINT8*)knightMv);
-    aux.push_back((UINT8*)bishopMv);
-    aux.push_back((UINT8*)rookMv);
-    aux.push_back((UINT8*)queenMv);
-    aux.push_back((UINT8*)kingMv);
+    aux.push_back((INT8*)pawnMvWhite);
+    aux.push_back((INT8*)pawnMvBlack);
+    aux.push_back((INT8*)knightMv);
+    aux.push_back((INT8*)bishopMv);
+    aux.push_back((INT8*)rookMv);
+    aux.push_back((INT8*)queenMv);
+    aux.push_back((INT8*)kingMv);
     
     return aux;
 }
 
 
-void imprimir(char mvList[56], UINT8  x, UINT8  y)
+void imprimir(UINT64 mv, UINT64 board, INT8 x, INT8  y)
 {
     char c[8][8];
-    for (UINT8  i = 0; i < 8; i++) {
-        for (UINT8  j =0; j < 8; j++) {
+    for (INT8  i = 0; i < 8; i++) {
+        for (INT8  j =0; j < 8; j++) {
             c[i][j] = '.';
         }
     }
-    UINT8  i = 0;
-    while (mvList[i] >= 0) {
-        c[mvList[i]][mvList[i+1]] = 'x';
-        i+=2;
+
+    
+    for (INT8  i = 0; i < 8; i++) {
+        for (INT8  j =0; j < 8; j++) {
+            if (board & 1 && mv & 1) {
+                c[i][j] = 'V';
+            }else {
+            if(board & 1) c[i][j] = 'E';
+            if(mv & 1) c[i][j] = 'x';
+            }
+            mv >>=1;
+            board >>=1;
+        }
     }
-    c[x][y] = 'O';
-    for (UINT8  i = 0; i < 8; i++) {
-        for (UINT8  j =0; j < 8; j++) {
-            printf("%c ", c[j][i]);
+    c[y][x] = 'O';
+    for (INT8  i = 0; i < 8; i++) {
+        for (INT8  j =0; j < 8; j++) {
+            printf("%c ",c[i][j]);
         }
         printf("\n");
     }
@@ -48,63 +57,60 @@ void imprimir(char mvList[56], UINT8  x, UINT8  y)
 
 PieceGraph::PieceGraph()
 {
-    for (UINT8 i=0 ; i < BSIZE; i++)
-        for (UINT8 j=0 ; j < BSIZE; j++)
-            this->reach[i][j] = (unsigned long int*) malloc(4);
+
 
 }
 
-void PieceGraph::initGraph(UINT8 type)
-{
 
+UINT64 PieceGraph::getReach(INT8 type, INT8 x,  INT8 y, INT8 mvList[MAXMV], UINT64 board)
+{
+    UINT64 bitBoard = 0;
+    INT8 k = 1;
+    INT8 n;
+    INT8 nx;
+    INT8 ny;
+    INT8 ring[lenghtMv[type]/8];
+    INT8 bp = blockedPath[type];
+    bool moreThanOnce;
+    if (type == BPAWN || type == WPAWN || type == KNIGHT || type == KING)
+        moreThanOnce = false;
+    else
+        moreThanOnce = true;
     
-    UINT8 *mv = mvArray[type];
-    UINT8 n = lenghtMv[type];
-    for (UINT8 i = 0 ; i < BSIZE ; i++)
-        for (UINT8 j=0 ; j < BSIZE; j++)
+    do
     {
-        if ((j == 1 && WPAWN) || (j == 6 && BPAWN)) n+=2;
-        for (UINT8 k = 0; k < n; k=k+2)
-        {
-            UINT8 x = i + mv[k];
-            UINT8 y = j + mv[k+1];
-            //if ( i == 1 && j == 1) printf(" %lu, (%d,%d) (%d,%d)\n",*reach[i][j],mv[k],mv[k+1],x,y);
-            while (0 <= x && x < BSIZE && 0 <= y && y < BSIZE) {
-                UINT64 sh = 1;
-                *reach[i][j] |= (sh << (y*BSIZE+x));
-                if (type == BPAWN || type == WPAWN || type == KING || type == KNIGHT) break;
-                else {
-                    x += mv[k];
-                    y += mv[k+1];
+        n = 0;
+        for (INT8 i = 0; i < lenghtMv[type]; i=i+2) {
+            
+            if (bp & bitPos[n] ){
+                nx = x+(k*mvArray[type][i]);
+                ny = (y + (k*mvArray[type][i+1]));
+                if (nx < 0 || nx > 7 || ny < 0 || ny > 7)
+                {
+                    bp &= ~bitPos[n++];
+                }
+                else
+                {
+                    ring[n] = 8*ny + nx;
+                    bitBoard |= bitPos[ring[n]];
+                    if (board & bitPos[ring[n]])
+                    {
+                        bp &= ~bitPos[n];
+                    }
+                    mvList[n] = ring[n];
+                    n++;
                 }
             }
+            else
+            {
+                n++;
+            }
         }
-        if ((j == 1 && WPAWN) || (j == 6 && BPAWN)) n-=2;
-    }
-}
+        k++;
+    }while (bp != 0 && moreThanOnce);
 
-void PieceGraph::getReach(UINT8 x,  UINT8 y, UINT8 mvList[MAXMV], UINT64 board)
-{
-    UINT8 j = 0;
-    UINT64 bitBoard = *reach[x][y];
-    UINT64 ring;
-    UINT8 *mv;
-    strcpy(mv, mvArray[QUEEN]);
-    for (UINT8 i = 0; i < lenghtMv[QUEEN]; i=i+2) {
-        UINT64 shift = 1;
-        ring |= shift << (8*(y+mv[i+1])+x+mv[i]);
-    }
-    for (UINT8 i = 0; i < BSIZE*BSIZE; i++)
-    {
-        //printf("%lu, %lu\n",bitBoard,*reach[x][y]);
-        if (bitBoard & 1)
-        {
-            mvList[j++] = i % BSIZE;
-            mvList[j++] = i / BSIZE;
-        }
-        bitBoard >>= 1;
-    }
-    mvList[j] = -1;
     
+    mvList[n] = -1;
+    return bitBoard;
 }
 
