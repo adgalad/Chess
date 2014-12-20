@@ -16,11 +16,14 @@ class ChessPiece
 public:
     INT8 type;
     INT8 color;
+    INT8 id;
     INT8 x;
     INT8 y;
+    INT8 lastPos;
+    INT8 lastLastPos;
     
     ChessPiece();
-    void initChessPiece(INT8 type, INT8 color, INT8 x, INT8 y);
+    void initChessPiece(INT8 type, INT8 color,INT8 id, INT8 x, INT8 y);
 };
 
 

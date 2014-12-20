@@ -17,11 +17,15 @@ void imprimir(UINT64 mv, UINT64 board, INT8  x, INT8  y);// Auxiliar function
 
 class ChessBoard
 {
+public:
     UINT64 whitePieces;
     UINT64 blackPieces;
+    UINT64 blackReach[16];
+    UINT64 whiteReach[16];
     UINT64 passantCapture;
     vector<INT8> mvList;
     ChessPiece *board[BSIZE*BSIZE];
+    
 
 public:
     vector<ChessPiece> wpArray;
@@ -34,6 +38,8 @@ public:
     // Class constructor
     ChessBoard();
     
+    void printBoard();
+    
     // Get the legal moves of a piece;
     UINT64 getReach(ChessPiece cp);
     
@@ -43,6 +49,11 @@ public:
     UINT64 getBlackPieces();
     
     bool playerMv();
+    bool cPlayerMv();
+    
+    UINT64 getTotalReach(UINT64 reach[16]);
+    UINT8 getPiecesFromBitArray(UINT64 pieces);
+    
     
 };
 

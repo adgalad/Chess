@@ -15,6 +15,8 @@
 #include <string>
 #include <cstdint>
 #include <vector>
+#include <time.h>
+#include <cstdlib>
 
 using namespace std;
 
@@ -64,6 +66,8 @@ const UINT64 bitPos[64] =
 
 #define BLACK 0
 #define WHITE 1
+
+#define PAWNV 1
 
 
 #endif

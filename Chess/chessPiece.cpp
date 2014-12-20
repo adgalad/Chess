@@ -9,12 +9,16 @@
 #include "chessPiece.h"
 
 
-ChessPiece::ChessPiece(){}
+ChessPiece::ChessPiece(){
+    lastLastPos = 0;
+    lastPos = 0;
+}
 
-void ChessPiece::initChessPiece(INT8 type, INT8 color, INT8 x, INT8 y)
+void ChessPiece::initChessPiece(INT8 type, INT8 color,INT8 id, INT8 x, INT8 y)
 {
     this->type = type;
     this->color = color;
-    this->x    = x;
+    this->id    = id;
+    this->x     = x;
     this->y    = y;
 }

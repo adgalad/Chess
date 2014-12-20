@@ -23,10 +23,10 @@ vector<INT8*> vectorMvInit()
     return aux;
 }
 
-ChessPiece newChessPiece(INT8 type, INT8 color, INT8 x, INT8 y)
+ChessPiece newChessPiece(INT8 type, INT8 color,INT8 id, INT8 x, INT8 y)
 {
     ChessPiece ncp = ChessPiece();
-    ncp.initChessPiece(type,color, x, y);
+    ncp.initChessPiece(type,color, id, x, y);
     return ncp;
 }
 
@@ -68,6 +68,55 @@ void imprimir(UINT64 mv, UINT64 board, INT8 x, INT8  y)
     printf("\n\n");
 }
 
+void ChessBoard::printBoard()
+{
+    char c[8][8];
+    for (INT8  i = 0; i < 8; i++) {
+        for (INT8  j =0; j < 8; j++) {
+            if (board[i*8+j] == NULL)
+            {
+                c[i][j] = '.';
+            }
+            else if (board[i*8+j]->type == BPAWN || board[i*8+j]->type == WPAWN)
+            {
+                c[i][j] = 'P';
+            }
+            else if (board[i*8+j]->type == BISHOP)
+            {
+                c[i][j] = 'B';
+            }
+            else if (board[i*8+j]->type == KNIGHT)
+            {
+                c[i][j] = 'H';
+            }
+            else if (board[i*8+j]->type == ROOK)
+            {
+                c[i][j] = 'R';
+            }
+            else if (board[i*8+j]->type == QUEEN)
+            {
+                c[i][j] = 'Q';
+            }
+            else if (board[i*8+j]->type == KING)
+            {
+                c[i][j] = 'K';
+            }
+        }
+    }
+    printf("  +-----------------+\n");
+    for (INT8  i = 7; i >= 0; i--) {
+        printf("%d | ", i+1);
+        for (INT8  j =0; j < 8; j++) {
+            printf("%c ",c[i][j]);
+        }
+        printf("|\n");
+    }
+    printf("  +-----------------+\n    ");
+    for (INT8  i = 0; i < 8; i++)
+        printf("%c ",i+0x41);
+    printf("\n\n");
+}
+
 void ChessBoard::setWhitePieces(UINT64 pieces)
 {
     whitePieces = pieces;
@@ -87,30 +136,37 @@ UINT64 ChessBoard::getBlackPieces()
 
 ChessBoard::ChessBoard()
 {
-    wpArray.push_back(newChessPiece(KING,WHITE, 4, 0));
-    bpArray.push_back(newChessPiece(KING,BLACK, 4, 7));
+    srand((unsigned int)time(NULL));
     
-    wpArray.push_back(newChessPiece(QUEEN,WHITE, 3, 0));
-    bpArray.push_back(newChessPiece(QUEEN,BLACK, 3, 7));
+    INT8 i = 0;
+    wpArray.push_back(newChessPiece(KING,WHITE, i, 4, 0));
+    bpArray.push_back(newChessPiece(KING,BLACK, i, 4, 7));
+    i++;
+    wpArray.push_back(newChessPiece(QUEEN,WHITE, i, 5, 4));
+    bpArray.push_back(newChessPiece(QUEEN,BLACK, i, 3, 7));
+    i++;
+    wpArray.push_back(newChessPiece(BISHOP,WHITE, i, 2, 0));
+    bpArray.push_back(newChessPiece(BISHOP,BLACK, i, 2, 7));
+    i++;
+    wpArray.push_back(newChessPiece(BISHOP,WHITE, i, 5, 0));
+    bpArray.push_back(newChessPiece(BISHOP,BLACK, i, 5, 7));
+    i++;
+    wpArray.push_back(newChessPiece(KNIGHT,WHITE, i, 1, 0));
+    bpArray.push_back(newChessPiece(KNIGHT,BLACK, i, 1, 7));
+    i++;
+    wpArray.push_back(newChessPiece(KNIGHT,WHITE, i, 6, 0));
+    bpArray.push_back(newChessPiece(KNIGHT,BLACK, i, 6, 7));
+    i++;
+    wpArray.push_back(newChessPiece(ROOK,WHITE, i, 0, 0));
+    wpArray.push_back(newChessPiece(ROOK,WHITE, i, 7, 0));
+    i++;
+    bpArray.push_back(newChessPiece(ROOK,BLACK, i, 0, 7));
+    bpArray.push_back(newChessPiece(ROOK,BLACK, i, 7, 7));
+    i++;
     
-    wpArray.push_back(newChessPiece(BISHOP,WHITE, 2, 0));
-    wpArray.push_back(newChessPiece(BISHOP,WHITE, 5, 0));
-    bpArray.push_back(newChessPiece(BISHOP,BLACK, 2, 7));
-    bpArray.push_back(newChessPiece(BISHOP,BLACK, 5, 7));
-    
-    wpArray.push_back(newChessPiece(KNIGHT,WHITE, 1, 0));
-    wpArray.push_back(newChessPiece(KNIGHT,WHITE, 6, 0));
-    bpArray.push_back(newChessPiece(KNIGHT,BLACK, 1, 7));
-    bpArray.push_back(newChessPiece(KNIGHT,BLACK, 6, 7));
-    
-    wpArray.push_back(newChessPiece(ROOK,WHITE, 0, 0));
-    wpArray.push_back(newChessPiece(ROOK,WHITE, 7, 0));
-    bpArray.push_back(newChessPiece(ROOK,BLACK, 0, 7));
-    bpArray.push_back(newChessPiece(ROOK,BLACK, 7, 7));
-    
-    for (int i = 0 ; i < 8 ; i++) {
-        wpArray.push_back(newChessPiece(WPAWN,WHITE, i, 1));
-        bpArray.push_back(newChessPiece(BPAWN,BLACK, i, 6));
+    for (int j = 0 ; j < 8 ; j++) {
+        wpArray.push_back(newChessPiece(WPAWN,WHITE, i+j, j, 1));
+        bpArray.push_back(newChessPiece(BPAWN,BLACK, i+j, j, 6));
     }
     
     for(int i = 0 ; i < BSIZE*BSIZE ; i++)
@@ -123,6 +179,11 @@ ChessBoard::ChessBoard()
         
         board[bpArray[i].y*8+bpArray[i].x] = &bpArray[i];
         blackPieces |= bitPos[bpArray[i].y*8+bpArray[i].x];
+    }
+    for (int i = 0; i < BSIZE*2; i++)
+    {
+        whiteReach[i] = getReach(wpArray[i]);
+        blackReach[i] = getReach(bpArray[i]);
     }
 }
 
