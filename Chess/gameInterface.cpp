@@ -47,10 +47,16 @@ bool GameInterface::eventGame()
         case SDL_KEYDOWN:
             if (event.key.keysym.sym == SDLK_ESCAPE)
                 return false;
+            else if (event.key.keysym.unicode == 'n')
+            {
+                newGame = true;
+                return false;
+            }
             break;
         case SDL_MOUSEBUTTONDOWN:
         {
-            if (event.motion.x >= 44 && event.motion.x < 584 &&
+            if (event.button.button == SDL_BUTTON_LEFT &&
+                event.motion.x >= 44 && event.motion.x < 584 &&
                 event.motion.y >= 43 && event.motion.y < 583)
             {
                 if (pickedPiece == -1)
@@ -61,6 +67,7 @@ bool GameInterface::eventGame()
                     printf("%d pos\n",pos);
                     if (mainBoard.whitePieces & bitPos[pos])
                     {
+                        if (mainBoard.board[pos]->type >0)
                         pickedPiece = mainBoard.board[pos]->id;
                     }
                 }
@@ -98,17 +105,25 @@ bool GameInterface::renderGame()
     for (int i = 0; i < 16; i++)
     {
         if (pickedPiece != i)
-        Csurface::OnDraw(mainScreen, surfaceArray[1],
+        {
+            Csurface::OnDraw(mainScreen, surfaceArray[1],
                          mainBoard.wpArray[i].x*68+44,
                          mainBoard.wpArray[i].y*68+43,
                          (SDLPieceSurfacePosition[mainBoard.wpArray[i].type-1])*68,
                          68, 68, 68);
-        
+        }
         Csurface::OnDraw(mainScreen, surfaceArray[1],
                          mainBoard.bpArray[i].x*68+44,
                          mainBoard.bpArray[i].y*68+43,
                          (SDLPieceSurfacePosition[mainBoard.bpArray[i].type-1])*68,
                          0, 68, 68);
+    }
+    if (pickedPiece > -1) {
+        Csurface::OnDraw(mainScreen, surfaceArray[1],
+                         event.motion.x-34,
+                         event.motion.y-34,
+                         (SDLPieceSurfacePosition[mainBoard.wpArray[pickedPiece].type-1])*68,
+                         68, 68, 68);
     }
     SDL_Flip(mainScreen);
     return true;

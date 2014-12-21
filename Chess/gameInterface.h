@@ -22,10 +22,11 @@ class GameInterface
     ChessBoard  mainBoard;
     SDL_Event   event;
     vector<SDL_Surface*> surfaceArray;
-    
     INT8 pickedPiece;  // needed to move pieces with the mouse
     
 public:
+    bool newGame;
+    
     GameInterface();
     bool initGame();
     void exitGame();

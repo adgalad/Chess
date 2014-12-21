@@ -59,6 +59,11 @@ bool ChessBoard::playerMv(bool terminal)
     UINT64 m = getReach(*board[oldPos]);
     if((m & bitPos[newPos]) && !(whitePieces & bitPos[newPos]))
     {
+        if (blackPieces & bitPos[newPos])
+        {
+            board[newPos]->type = OUT;
+            blackPieces &= ~bitPos[newPos];
+        }
         board[newPos] = board[oldPos];
         board[oldPos] =  NULL;
         board[newPos]->x = str[2];

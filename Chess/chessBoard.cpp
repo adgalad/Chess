@@ -277,8 +277,6 @@ UINT64 ChessBoard::getReach(ChessPiece cp)
                         {
                             bp &= ~bitPos[n];
                         }
-                        if (cp.type == QUEEN && cp.color == WHITE)
-                            imprimir(bitBoard, 0, 1, 1);
                         mvList.push_back(ring[n]);
                         n++;
                     }

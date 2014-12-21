@@ -11,7 +11,13 @@
 
 int SDL_main(int argc, char **argv)
 {
-    GameInterface game = GameInterface();
-    game.executeGame();
+    GameInterface game;
+    do
+    {
+        game.newGame = false;
+        game = GameInterface();
+        game.executeGame();
+    }while(game.newGame);
+    
     return 0;
 }
