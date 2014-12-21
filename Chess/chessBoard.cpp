@@ -139,34 +139,34 @@ ChessBoard::ChessBoard()
     srand((unsigned int)time(NULL));
     
     INT8 i = 0;
-    wpArray.push_back(newChessPiece(KING,WHITE, i, 4, 0));
     bpArray.push_back(newChessPiece(KING,BLACK, i, 4, 7));
+    wpArray.push_back(newChessPiece(KING,WHITE, i, 4, 0));
     i++;
-    wpArray.push_back(newChessPiece(QUEEN,WHITE, i, 5, 4));
     bpArray.push_back(newChessPiece(QUEEN,BLACK, i, 3, 7));
+    wpArray.push_back(newChessPiece(QUEEN,WHITE, i, 3, 0));
     i++;
-    wpArray.push_back(newChessPiece(BISHOP,WHITE, i, 2, 0));
     bpArray.push_back(newChessPiece(BISHOP,BLACK, i, 2, 7));
+    wpArray.push_back(newChessPiece(BISHOP,WHITE, i, 2, 0));
     i++;
-    wpArray.push_back(newChessPiece(BISHOP,WHITE, i, 5, 0));
     bpArray.push_back(newChessPiece(BISHOP,BLACK, i, 5, 7));
+    wpArray.push_back(newChessPiece(BISHOP,WHITE, i, 5, 0));
     i++;
-    wpArray.push_back(newChessPiece(KNIGHT,WHITE, i, 1, 0));
     bpArray.push_back(newChessPiece(KNIGHT,BLACK, i, 1, 7));
+    wpArray.push_back(newChessPiece(KNIGHT,WHITE, i, 1, 0));
     i++;
-    wpArray.push_back(newChessPiece(KNIGHT,WHITE, i, 6, 0));
     bpArray.push_back(newChessPiece(KNIGHT,BLACK, i, 6, 7));
-    i++;
-    wpArray.push_back(newChessPiece(ROOK,WHITE, i, 0, 0));
-    wpArray.push_back(newChessPiece(ROOK,WHITE, i, 7, 0));
+    wpArray.push_back(newChessPiece(KNIGHT,WHITE, i, 6, 0));
     i++;
     bpArray.push_back(newChessPiece(ROOK,BLACK, i, 0, 7));
+    wpArray.push_back(newChessPiece(ROOK,WHITE, i, 0, 0));
+    i++;
     bpArray.push_back(newChessPiece(ROOK,BLACK, i, 7, 7));
+    wpArray.push_back(newChessPiece(ROOK,WHITE, i, 7, 0));
     i++;
     
     for (int j = 0 ; j < 8 ; j++) {
-        wpArray.push_back(newChessPiece(WPAWN,WHITE, i+j, j, 1));
-        bpArray.push_back(newChessPiece(BPAWN,BLACK, i+j, j, 6));
+        bpArray.push_back(newChessPiece(WPAWN,BLACK, i+j, j, 6));
+        wpArray.push_back(newChessPiece(BPAWN,WHITE, i+j, j, 1));
     }
     
     for(int i = 0 ; i < BSIZE*BSIZE ; i++)

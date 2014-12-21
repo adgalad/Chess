@@ -25,7 +25,7 @@ public:
     UINT64 passantCapture;
     vector<INT8> mvList;
     ChessPiece *board[BSIZE*BSIZE];
-    
+    string str;
 
 public:
     vector<ChessPiece> wpArray;
@@ -48,7 +48,7 @@ public:
     UINT64 getWhitePieces();
     UINT64 getBlackPieces();
     
-    bool playerMv();
+    bool playerMv(bool terminal = false);
     bool cPlayerMv();
     
     UINT64 getTotalReach(UINT64 reach[16]);

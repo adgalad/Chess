@@ -17,6 +17,9 @@
 #include <vector>
 #include <time.h>
 #include <cstdlib>
+#include <SDL/SDL.h>
+#include <SDL_image/SDL_image.h>
+#include <SDL/SDL_opengl.h>
 
 using namespace std;
 
@@ -24,9 +27,11 @@ typedef unsigned long int UINT64;
 typedef int8_t INT8;
 typedef uint8_t UINT8;
 
+
+/* CHESS GAME DEFINITIONS */
 const INT8 lenghtMv[8]    = {0,6,6,16,8,8,16,16};
 const INT8 pawnMvBlack[8] = { 0,-1, 1,-1 ,-1,-1 , 0,-2};
-const INT8 pawnMvWhite[8] = { 0,1 , 1,1 , -1,1 , 0,2}; 
+const INT8 pawnMvWhite[8] = { 0,1 , 1,1 , -1,1 , 0,2};
 const INT8 knightMv[16]   = {2,1,2,-1,-2,1,-2,-1,1,2,1,-2,-1,2,-1,-2};
 const INT8 bishopMv[8]    = {1,1,1,-1,-1,1,-1,-1};
 const INT8 rookMv[8]      = {0,1,1,0,0,-1,-1,0};
@@ -34,7 +39,7 @@ const INT8 queenMv[16]    = {1,1,1,-1,-1,1,-1,-1,1,0,-1,0,0,1,0,-1};
 const INT8 kingMv[16]     = {1,1,1,-1,-1,1,-1,-1,1,0,-1,0,0,1,0,-1};
 const UINT8 blockedPath[8] = {0,7,0x7,0xff,0xf,0xf,0xff,0xff};
 const UINT64 bitPos[64] =
-   {0x1,               0x2,               0x4,               0x8,
+{0x1,               0x2,               0x4,               0x8,
     0x10,              0x20,              0x40,              0x80,
     0x100,             0x200,             0x400,             0x800,
     0x1000,            0x2000,            0x4000,            0x8000,
@@ -67,7 +72,5 @@ const UINT64 bitPos[64] =
 #define BLACK 0
 #define WHITE 1
 
-#define PAWNV 1
-
-
+#define PAWNV 1 
 #endif

@@ -6,28 +6,20 @@
 //  Copyright (c) 2014 ARSC. All rights reserved.
 //
 
-#include "chessBoard.h"
+#include "gameInterface.h"
 
 
-int main()
+int SDL_main(int argc, char **argv)
 {
-    ChessBoard a = ChessBoard();
-
-    INT8  x= 4;
-    while(1){
-
-        a.printBoard();
-        while(!a.playerMv());
-        UINT64 bm = a.getTotalReach(a.blackReach);
-        UINT64 wm = a.getTotalReach(a.whiteReach);
-        imprimir(bm, a.blackPieces|a.whitePieces, 0, 0);
-        imprimir(wm, a.blackPieces|a.whitePieces, 0, 0);
-        imprimir(bm & ~wm & ~a.blackPieces, a.blackPieces|a.whitePieces, 0, 0);
-        a.printBoard();
-        a.cPlayerMv();
-
-
+    ChessBoard b = ChessBoard();
+    
+    while(1)
+    {
+        b.printBoard();
+        b.playerMv(true);
     }
     
+    //GameInterface game = GameInterface();
+    //game.executeGame();
     return 0;
 }
