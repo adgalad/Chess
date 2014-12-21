@@ -59,7 +59,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "&lt; /Users/carlosspaggiari/Desktop/C-C++/PROYECTOS/Chess/Chess/File"
+            argument = "-l /Users/carlosspagiari/SDL_mixer.framework/Headers/SDL_mixer.h "
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

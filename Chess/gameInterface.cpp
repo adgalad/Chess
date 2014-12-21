@@ -73,10 +73,18 @@ bool GameInterface::eventGame()
                 }
                 else
                 {
+                    
                     mainBoard.str[2] = (event.motion.x-44)/68;
                     mainBoard.str[3] = (event.motion.y-43)/68;
-                    mainBoard.playerMv();
-                    pickedPiece = -1;
+                    if (mainBoard.playerMv())
+                    {
+                        pickedPiece = -1;
+                        mainBoard.cPlayerMv();
+                    }
+                    else{
+                        pickedPiece = -1;
+                    }
+                    Mix_PlayMusic(moveSound, 1);
                 }
             }
             break;
@@ -154,6 +162,9 @@ bool GameInterface::initGame()
     /* Enable Key Repeat */
     SDL_EnableKeyRepeat(1, SDL_DEFAULT_REPEAT_INTERVAL / 3);
     
+    /*Enable Music mixer */
+    Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096);
+    moveSound = Mix_LoadMUS("/Users/carlosspaggiari/Desktop/C-C++/PROYECTOS/Chess/Chess/Resource/moveSound.wav");
     string img = path + "board.jpg";
     surfaceArray.push_back(Csurface::OnLoad(&img[0]));
     img = path + "pieces.png";
@@ -166,5 +177,7 @@ bool GameInterface::initGame()
 void GameInterface::exitGame()
 {
     SDL_FreeSurface(mainScreen);
+    Mix_FreeMusic(moveSound);
+    Mix_CloseAudio();
     SDL_Quit();
 }

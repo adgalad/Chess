@@ -24,6 +24,8 @@ class GameInterface
     vector<SDL_Surface*> surfaceArray;
     INT8 pickedPiece;  // needed to move pieces with the mouse
     
+    Mix_Music *moveSound;
+    
 public:
     bool newGame;
     

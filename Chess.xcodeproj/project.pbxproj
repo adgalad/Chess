@@ -9,11 +9,12 @@
 /* Begin PBXBuildFile section */
 		071080671A468F6000A8FF5B /* SDLMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 071080661A468F6000A8FF5B /* SDLMain.m */; };
 		0710806A1A468F7600A8FF5B /* SDL_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 071080681A468F7600A8FF5B /* SDL_image.framework */; };
-		0710806B1A468F7600A8FF5B /* SDL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 071080691A468F7600A8FF5B /* SDL.framework */; };
+		0710D1D91A46A51A00A4EE9E /* SDL_mixer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0710D1D81A46A51A00A4EE9E /* SDL_mixer.framework */; };
 		0740B96D1A462F2C00F9E2A2 /* gameInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0740B96B1A462F2C00F9E2A2 /* gameInterface.cpp */; };
 		0740B96F1A4652B400F9E2A2 /* SDLSurfaceRenderTools.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0740B96E1A4652B400F9E2A2 /* SDLSurfaceRenderTools.cpp */; };
 		07A521E61A44BFCC008BF435 /* chessPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07A521E51A44BFCC008BF435 /* chessPlayer.cpp */; };
 		07A521E81A44DCAB008BF435 /* chessCPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07A521E71A44DCAB008BF435 /* chessCPlayer.cpp */; };
+		07BA81C41A46A1BC009CABFF /* SDL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07BA81C31A46A1BC009CABFF /* SDL.framework */; };
 		07E147861A426E990076F082 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07E147851A426E990076F082 /* main.cpp */; };
 		07E1478A1A426F4A0076F082 /* chessBoard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07E147881A426F4A0076F082 /* chessBoard.cpp */; };
 		07E1478D1A4271D10076F082 /* chessPiece.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 07E1478C1A4271D10076F082 /* chessPiece.cpp */; };
@@ -41,7 +42,10 @@
 		071080651A468F5800A8FF5B /* SDLMain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDLMain.h; sourceTree = "<group>"; };
 		071080661A468F6000A8FF5B /* SDLMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLMain.m; sourceTree = "<group>"; };
 		071080681A468F7600A8FF5B /* SDL_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL_image.framework; sourceTree = "<group>"; };
-		071080691A468F7600A8FF5B /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL.framework; sourceTree = "<group>"; };
+		0710806C1A46965E00A8FF5B /* info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = info.plist; path = DerivedData/Chess/info.plist; sourceTree = SOURCE_ROOT; };
+		0710806D1A46969100A8FF5B /* Chess.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Chess.icns; sourceTree = "<group>"; };
+		0710D1D81A46A51A00A4EE9E /* SDL_mixer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SDL_mixer.framework; sourceTree = "<group>"; };
+		0710D1DA1A46A76600A4EE9E /* moveSound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = moveSound.wav; sourceTree = "<group>"; };
 		0740B96B1A462F2C00F9E2A2 /* gameInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gameInterface.cpp; sourceTree = "<group>"; };
 		0740B96C1A462F2C00F9E2A2 /* gameInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gameInterface.h; sourceTree = "<group>"; };
 		0740B96E1A4652B400F9E2A2 /* SDLSurfaceRenderTools.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SDLSurfaceRenderTools.cpp; sourceTree = "<group>"; };
@@ -49,7 +53,7 @@
 		07A521E51A44BFCC008BF435 /* chessPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = chessPlayer.cpp; sourceTree = "<group>"; };
 		07A521E71A44DCAB008BF435 /* chessCPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = chessCPlayer.cpp; sourceTree = "<group>"; };
 		07AC0EB21A2A4D3300418DA2 /* Chess */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Chess; sourceTree = BUILT_PRODUCTS_DIR; };
-		07BCD20B1A3BA68E00695C49 /* File */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = File; sourceTree = "<group>"; };
+		07BA81C31A46A1BC009CABFF /* SDL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL.framework; path = ../../../../SDL.framework; sourceTree = "<group>"; };
 		07E147851A426E990076F082 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		07E147871A426EC00076F082 /* chessHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = chessHeader.h; sourceTree = "<group>"; };
 		07E147881A426F4A0076F082 /* chessBoard.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = chessBoard.cpp; sourceTree = "<group>"; };
@@ -65,8 +69,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07BA81C41A46A1BC009CABFF /* SDL.framework in Frameworks */,
 				0710806A1A468F7600A8FF5B /* SDL_image.framework in Frameworks */,
-				0710806B1A468F7600A8FF5B /* SDL.framework in Frameworks */,
+				0710D1D91A46A51A00A4EE9E /* SDL_mixer.framework in Frameworks */,
 				07EBBD751A3CA62900BD8978 /* OpenGL.framework in Frameworks */,
 				07EBBD731A3CA62400BD8978 /* Cocoa.framework in Frameworks */,
 			);
@@ -78,6 +83,8 @@
 		0710805F1A468A3E00A8FF5B /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				0710D1DA1A46A76600A4EE9E /* moveSound.wav */,
+				0710806D1A46969100A8FF5B /* Chess.icns */,
 				071080601A468A3E00A8FF5B /* board.fla */,
 				071080611A468A3E00A8FF5B /* board.jpg */,
 				071080631A468A3E00A8FF5B /* pieces.png */,
@@ -109,8 +116,10 @@
 		07AC0EA91A2A4D3300418DA2 = {
 			isa = PBXGroup;
 			children = (
+				0710D1D81A46A51A00A4EE9E /* SDL_mixer.framework */,
+				07BA81C31A46A1BC009CABFF /* SDL.framework */,
+				0710806C1A46965E00A8FF5B /* info.plist */,
 				071080681A468F7600A8FF5B /* SDL_image.framework */,
-				071080691A468F7600A8FF5B /* SDL.framework */,
 				07EBBD741A3CA62900BD8978 /* OpenGL.framework */,
 				07EBBD721A3CA62400BD8978 /* Cocoa.framework */,
 				07AC0EB41A2A4D3300418DA2 /* Chess */,
@@ -132,7 +141,6 @@
 				0710805F1A468A3E00A8FF5B /* Resource */,
 				07AC0EC31A2A529E00418DA2 /* header */,
 				07AC0EC41A2A52BA00418DA2 /* source */,
-				07BCD20B1A3BA68E00695C49 /* File */,
 				07EBBD6E1A3CA5EE00BD8978 /* SDL source */,
 			);
 			path = Chess;
@@ -319,6 +327,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					/Users/carlosspaggiari,
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/SDL_mixer.framework/Versions/A/Frameworks",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -330,6 +339,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					/Users/carlosspaggiari,
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/SDL_mixer.framework/Versions/A/Frameworks",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

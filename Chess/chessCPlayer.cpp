@@ -22,10 +22,13 @@ UINT8 ChessBoard::getPiecesFromBitArray(UINT64 pieces)
     UINT8 res = 0;
     for (UINT8 i = 0; i < BSIZE*BSIZE && pieces > 0 ; i++)
     {
-        if (pieces & 1 && board[i] != NULL && max < board[i]->type)
+        if (pieces & 1 && (whitePieces|blackPieces)&bitPos[i])
         {
-            max = board[i]->type;
-            res = i;
+           if(max < board[i]->type)
+           {
+               max = board[i]->type;
+               res = i;
+           }
         }
         pieces >>=1;
     }
