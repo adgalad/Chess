@@ -56,17 +56,7 @@ bool ChessBoard::playerMv(bool terminal)
         
         return false;
     }
-    UINT64 m = whiteReach[board[oldPos]->id];
-    UINT64 gg=whitePieces;
-    for (UINT64 i=0; i < 64;  i++) {
-        if (gg & 1)
-        {
-            printf("(%lu,%lu)\n",i%8,i/8);
-        }
-        gg >>=1;
-    }
-    printf("%d (%d,%d) ==> %d (%d,%d)\n",oldPos,str[0],str[1],newPos,str[2],str[3]);
-    printBoard();
+    UINT64 m = getReach(*board[oldPos]);
     if((m & bitPos[newPos]) && !(whitePieces & bitPos[newPos]))
     {
         board[newPos] = board[oldPos];
@@ -82,6 +72,6 @@ bool ChessBoard::playerMv(bool terminal)
         printf("No se puede mover o la casilla no esta vacia\n");
         return 0;
     }
-
+    
     return true;
 }

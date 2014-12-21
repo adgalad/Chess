@@ -11,15 +11,7 @@
 
 int SDL_main(int argc, char **argv)
 {
-    ChessBoard b = ChessBoard();
-    
-    while(1)
-    {
-        b.printBoard();
-        b.playerMv(true);
-    }
-    
-    //GameInterface game = GameInterface();
-    //game.executeGame();
+    GameInterface game = GameInterface();
+    game.executeGame();
     return 0;
 }

@@ -59,8 +59,7 @@ bool GameInterface::eventGame()
                     mainBoard.str[1] = (event.motion.y-43)/68;
                     int pos = 8*mainBoard.str[1]+mainBoard.str[0];
                     printf("%d pos\n",pos);
-                    if (mainBoard.board[pos] != NULL
-                        && mainBoard.board[pos]->color == WHITE)
+                    if (mainBoard.whitePieces & bitPos[pos])
                     {
                         pickedPiece = mainBoard.board[pos]->id;
                     }

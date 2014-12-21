@@ -55,8 +55,8 @@ void imprimir(UINT64 mv, UINT64 board, INT8 x, INT8  y)
     }
     c[y][x] = 'O';
     printf("  +-----------------+\n");
-    for (INT8  i = 7; i >= 0; i--) {
-        printf("%d | ", i+1);
+    for (INT8  i = 0; i < 8 ; i++) {
+        printf("%d | ", 8-i);
         for (INT8  j =0; j < 8; j++) {
             printf("%c ",c[i][j]);
         }
@@ -104,8 +104,8 @@ void ChessBoard::printBoard()
         }
     }
     printf("  +-----------------+\n");
-    for (INT8  i = 7; i >= 0; i--) {
-        printf("%d | ", i+1);
+    for (INT8  i = 0; i < 8; i++) {
+        printf("%d | ", 8-i);
         for (INT8  j =0; j < 8; j++) {
             printf("%c ",c[i][j]);
         }
@@ -139,39 +139,38 @@ ChessBoard::ChessBoard()
     srand((unsigned int)time(NULL));
     
     INT8 i = 0;
-    bpArray.push_back(newChessPiece(KING,BLACK, i, 4, 7));
-    wpArray.push_back(newChessPiece(KING,WHITE, i, 4, 0));
+    bpArray.push_back(newChessPiece(KING,BLACK, i, 4, 0));
+    wpArray.push_back(newChessPiece(KING,WHITE, i, 4, 7));
     i++;
-    bpArray.push_back(newChessPiece(QUEEN,BLACK, i, 3, 7));
-    wpArray.push_back(newChessPiece(QUEEN,WHITE, i, 3, 0));
+    bpArray.push_back(newChessPiece(QUEEN,BLACK, i, 3, 0));
+    wpArray.push_back(newChessPiece(QUEEN,WHITE, i, 3, 7));
     i++;
-    bpArray.push_back(newChessPiece(BISHOP,BLACK, i, 2, 7));
-    wpArray.push_back(newChessPiece(BISHOP,WHITE, i, 2, 0));
+    bpArray.push_back(newChessPiece(BISHOP,BLACK, i, 2, 0));
+    wpArray.push_back(newChessPiece(BISHOP,WHITE, i, 2, 7));
     i++;
-    bpArray.push_back(newChessPiece(BISHOP,BLACK, i, 5, 7));
-    wpArray.push_back(newChessPiece(BISHOP,WHITE, i, 5, 0));
+    bpArray.push_back(newChessPiece(BISHOP,BLACK, i, 5, 0));
+    wpArray.push_back(newChessPiece(BISHOP,WHITE, i, 5, 7));
     i++;
-    bpArray.push_back(newChessPiece(KNIGHT,BLACK, i, 1, 7));
-    wpArray.push_back(newChessPiece(KNIGHT,WHITE, i, 1, 0));
+    bpArray.push_back(newChessPiece(KNIGHT,BLACK, i, 1, 0));
+    wpArray.push_back(newChessPiece(KNIGHT,WHITE, i, 1, 7));
     i++;
-    bpArray.push_back(newChessPiece(KNIGHT,BLACK, i, 6, 7));
-    wpArray.push_back(newChessPiece(KNIGHT,WHITE, i, 6, 0));
+    bpArray.push_back(newChessPiece(KNIGHT,BLACK, i, 6, 0));
+    wpArray.push_back(newChessPiece(KNIGHT,WHITE, i, 6, 7));
     i++;
-    bpArray.push_back(newChessPiece(ROOK,BLACK, i, 0, 7));
-    wpArray.push_back(newChessPiece(ROOK,WHITE, i, 0, 0));
+    bpArray.push_back(newChessPiece(ROOK,BLACK, i, 0, 0));
+    wpArray.push_back(newChessPiece(ROOK,WHITE, i, 0, 7));
     i++;
-    bpArray.push_back(newChessPiece(ROOK,BLACK, i, 7, 7));
-    wpArray.push_back(newChessPiece(ROOK,WHITE, i, 7, 0));
+    bpArray.push_back(newChessPiece(ROOK,BLACK, i, 7, 0));
+    wpArray.push_back(newChessPiece(ROOK,WHITE, i, 7, 7));
     i++;
     
     for (int j = 0 ; j < 8 ; j++) {
-        bpArray.push_back(newChessPiece(WPAWN,BLACK, i+j, j, 6));
-        wpArray.push_back(newChessPiece(BPAWN,WHITE, i+j, j, 1));
+        bpArray.push_back(newChessPiece(WPAWN,BLACK, i+j, j, 1));
+        wpArray.push_back(newChessPiece(BPAWN,WHITE, i+j, j, 6));
     }
     
-    for(int i = 0 ; i < BSIZE*BSIZE ; i++)
-            board[i] = NULL;
-    
+    whitePieces = 0;
+    blackPieces = 0;
     for(int i = 0 ; i < BSIZE*2 ; i++)
     {
         board[wpArray[i].y*8+wpArray[i].x] = &wpArray[i];
@@ -278,6 +277,8 @@ UINT64 ChessBoard::getReach(ChessPiece cp)
                         {
                             bp &= ~bitPos[n];
                         }
+                        if (cp.type == QUEEN && cp.color == WHITE)
+                            imprimir(bitBoard, 0, 1, 1);
                         mvList.push_back(ring[n]);
                         n++;
                     }
