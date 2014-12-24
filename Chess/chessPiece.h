@@ -19,6 +19,8 @@ public:
     INT8 id;
     INT8 x;
     INT8 y;
+    INT8 pos;
+    UINT64 bit;
     INT8 lastPos;
     INT8 lastLastPos;
     

@@ -20,5 +20,7 @@ void ChessPiece::initChessPiece(INT8 type, INT8 color,INT8 id, INT8 x, INT8 y)
     this->color = color;
     this->id    = id;
     this->x     = x;
-    this->y    = y;
+    this->y     = y;
+    this->pos   = 8*y+x;
+    this->bit   = bitPos[this->pos];
 }

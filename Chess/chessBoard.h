@@ -45,14 +45,18 @@ public:
     
     void setWhitePieces(UINT64 pieces);
     void setBlackPieces(UINT64 pieces);
+    void getNewReach(UINT64 bits);
     UINT64 getWhitePieces();
     UINT64 getBlackPieces();
     
+    /* chessPlayer.cpp */
     bool playerMv(bool terminal = false);
-    bool cPlayerMv();
     
-    UINT64 getTotalReach(UINT64 reach[16]);
+    /* chessCPlayer.cpp */
+    bool cPlayerMv();
+    UINT64 getTotalReach(INT8 color);
     UINT8 getPiecesFromBitArray(UINT64 pieces);
+    void  moveBlackPiece(UINT8 oldPos, UINT8 newPos);
     
     
 };

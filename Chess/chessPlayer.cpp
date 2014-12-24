@@ -56,7 +56,7 @@ bool ChessBoard::playerMv(bool terminal)
         
         return false;
     }
-    UINT64 m = getReach(*board[oldPos]);
+    UINT64 m = whiteReach[board[oldPos]->id];
     if((m & bitPos[newPos]) && !(whitePieces & bitPos[newPos]))
     {
         if (blackPieces & bitPos[newPos])
@@ -68,9 +68,14 @@ bool ChessBoard::playerMv(bool terminal)
         board[oldPos] =  NULL;
         board[newPos]->x = str[2];
         board[newPos]->y = str[3];
+        board[newPos]->pos = newPos;
+        board[newPos]->bit = bitPos[newPos];
+        board[newPos]->lastLastPos = board[newPos]->lastPos;
+        board[newPos]->lastPos = oldPos;
         whiteReach[board[newPos]->id] = getReach(*board[newPos]);
         whitePieces &= ~bitPos[oldPos];
         whitePieces |= bitPos[newPos];
+        getNewReach(bitPos[oldPos]|bitPos[newPos]);
     }
     else
     {

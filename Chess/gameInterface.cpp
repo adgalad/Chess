@@ -14,6 +14,8 @@ GameInterface::GameInterface()
 {
     mainScreen = NULL;
     mainBoard = ChessBoard();
+    idle = false;
+    checkmate = false;
 }
 
 void GameInterface::executeGame()
@@ -23,20 +25,22 @@ void GameInterface::executeGame()
         printf("error\n");
     }
     bool run = true;
+    renderGame();
     while (run) {
-        while (SDL_PollEvent(&event))
+        
+        while (SDL_WaitEvent(&event) >= 0 )
         {
-            if (!eventGame())
+            if (event.type != SDL_MOUSEMOTION || idle)
             {
-                exitGame();
-                return;
+                if (!eventGame())
+                {
+                  exitGame();
+                  return;
+                        
+                }
+                renderGame();
             }
         }
-        if (loopGame() && run)
-        {
-            run = renderGame();
-        }
-        else run = false;
     }
     exitGame();
 }
@@ -70,6 +74,7 @@ bool GameInterface::eventGame()
                         if (mainBoard.board[pos]->type >0)
                         pickedPiece = mainBoard.board[pos]->id;
                     }
+                    idle = true;
                 }
                 else
                 {
@@ -79,12 +84,18 @@ bool GameInterface::eventGame()
                     if (mainBoard.playerMv())
                     {
                         pickedPiece = -1;
-                        mainBoard.cPlayerMv();
+                        Mix_PlayMusic(moveSound, 1);
+                        if (!mainBoard.cPlayerMv())
+                        {
+                            checkmate = true;
+                            newGame = true;
+                            return false;
+                        }
                     }
                     else{
                         pickedPiece = -1;
                     }
-                    Mix_PlayMusic(moveSound, 1);
+                    idle = false;
                 }
             }
             break;
@@ -112,7 +123,7 @@ bool GameInterface::renderGame()
     Csurface::OnDraw(mainScreen, surfaceArray[0], 0, 0);
     for (int i = 0; i < 16; i++)
     {
-        if (pickedPiece != i)
+        if (pickedPiece != i && mainBoard.wpArray[i].type)
         {
             Csurface::OnDraw(mainScreen, surfaceArray[1],
                          mainBoard.wpArray[i].x*68+44,
@@ -120,11 +131,14 @@ bool GameInterface::renderGame()
                          (SDLPieceSurfacePosition[mainBoard.wpArray[i].type-1])*68,
                          68, 68, 68);
         }
-        Csurface::OnDraw(mainScreen, surfaceArray[1],
+        if (mainBoard.bpArray[i].type)
+        {
+            Csurface::OnDraw(mainScreen, surfaceArray[1],
                          mainBoard.bpArray[i].x*68+44,
                          mainBoard.bpArray[i].y*68+43,
                          (SDLPieceSurfacePosition[mainBoard.bpArray[i].type-1])*68,
                          0, 68, 68);
+        }
     }
     if (pickedPiece > -1) {
         Csurface::OnDraw(mainScreen, surfaceArray[1],

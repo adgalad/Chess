@@ -165,7 +165,7 @@ static void setApplicationMenu(void)
 
     /* Finally give up our references to the objects */
     //[appleMenu release];
-   // [menuItem release];
+    //[menuItem release];
 }
 
 /* Create a window menu */
@@ -198,7 +198,7 @@ static void setupWindowMenu(void)
 /* Replacement for NSApplicationMain */
 static void CustomApplicationMain (int argc, char **argv)
 {
-   // NSAutoreleasePool	*pool = [[NSAutoreleasePool alloc] init];
+    //NSAutoreleasePool	*pool = [[NSAutoreleasePool alloc] init];
     SDLMain				*sdlMain;
 
     /* Ensure the application object is initialised */
@@ -227,7 +227,7 @@ static void CustomApplicationMain (int argc, char **argv)
     /* Start the main event loop */
     [NSApp run];
     
-   // [sdlMain release];
+    //[sdlMain release];
     //[pool release];
 }
 

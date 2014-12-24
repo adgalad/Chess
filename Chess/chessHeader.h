@@ -22,6 +22,12 @@
 #include <SDL/SDL_opengl.h>
 #include <SDL_mixer/SDL_mixer.h>
 
+
+
+
+
+
+
 using namespace std;
 
 typedef unsigned long int UINT64;

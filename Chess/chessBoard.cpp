@@ -101,6 +101,9 @@ void ChessBoard::printBoard()
             {
                 c[i][j] = 'K';
             }
+            else{
+                c[i][j] = '.';
+            }
         }
     }
     printf("  +-----------------+\n");
@@ -165,24 +168,31 @@ ChessBoard::ChessBoard()
     i++;
     
     for (int j = 0 ; j < 8 ; j++) {
-        bpArray.push_back(newChessPiece(WPAWN,BLACK, i+j, j, 1));
-        wpArray.push_back(newChessPiece(BPAWN,WHITE, i+j, j, 6));
+        bpArray.push_back(newChessPiece(OUT,BLACK, i+j, j, 1));
+        wpArray.push_back(newChessPiece(OUT,WHITE, i+j, j, 6));
     }
     
     whitePieces = 0;
     blackPieces = 0;
+    for(int i = 0 ; i < BSIZE*BSIZE ; i++)
+    {
+        board[i] = NULL;
+    }
     for(int i = 0 ; i < BSIZE*2 ; i++)
     {
-        board[wpArray[i].y*8+wpArray[i].x] = &wpArray[i];
-        whitePieces |= bitPos[wpArray[i].y*8+wpArray[i].x];
+        if(wpArray[i].type != OUT)
+        {
+            board[wpArray[i].y*8+wpArray[i].x] = &wpArray[i];
+            whitePieces |= bitPos[wpArray[i].y*8+wpArray[i].x];
+            whiteReach[i] = getReach(wpArray[i]);
+        }
         
-        board[bpArray[i].y*8+bpArray[i].x] = &bpArray[i];
-        blackPieces |= bitPos[bpArray[i].y*8+bpArray[i].x];
-    }
-    for (int i = 0; i < BSIZE*2; i++)
-    {
-        whiteReach[i] = getReach(wpArray[i]);
-        blackReach[i] = getReach(bpArray[i]);
+        if (bpArray[i].type != OUT)
+        {
+            board[bpArray[i].y*8+bpArray[i].x] = &bpArray[i];
+            blackPieces |= bitPos[bpArray[i].y*8+bpArray[i].x];
+            blackReach[i] = getReach(bpArray[i]);
+        }
     }
 }
 
@@ -290,4 +300,19 @@ UINT64 ChessBoard::getReach(ChessPiece cp)
         }while (bp != 0);
     }
     return bitBoard;
+}
+
+void ChessBoard::getNewReach(UINT64 bits)
+{
+    for(int i=0 ; i < 16 ; i++)
+    {
+        if (whiteReach[i] & bits)
+        {
+            whiteReach[i] = getReach(wpArray[i]);
+        }
+        if (blackReach[i] & bits)
+        {
+            blackReach[i] = getReach(bpArray[i]);
+        }
+    }
 }

@@ -85,10 +85,10 @@
 			children = (
 				0710D1DA1A46A76600A4EE9E /* moveSound.wav */,
 				0710806D1A46969100A8FF5B /* Chess.icns */,
+				071080641A468A3E00A8FF5B /* pieces.psd */,
 				071080601A468A3E00A8FF5B /* board.fla */,
 				071080611A468A3E00A8FF5B /* board.jpg */,
 				071080631A468A3E00A8FF5B /* pieces.png */,
-				071080641A468A3E00A8FF5B /* pieces.psd */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -324,10 +324,12 @@
 		07AC0EBA1A2A4D3400418DA2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					/Users/carlosspaggiari,
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/SDL_mixer.framework/Versions/A/Frameworks",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -336,10 +338,12 @@
 		07AC0EBB1A2A4D3400418DA2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					/Users/carlosspaggiari,
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/SDL_mixer.framework/Versions/A/Frameworks",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
