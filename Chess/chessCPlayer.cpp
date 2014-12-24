@@ -71,7 +71,37 @@ bool ChessBoard::cPlayerMv()
     /*************/
     if (wm & bitPos[bpArray[0].pos])
     {
-        
+        UINT64 WhiteAttackers = 0;
+        for (UINT8 i = 1; i < 16 ; i++)
+        {
+            if (whiteReach[i] & bitPos[bpArray[0].pos])
+            {
+                WhiteAttackers |= bitPos[wpArray[i].pos];
+            }
+        }
+        if (bm & WhiteAttackers)
+        {
+            printf("0.0\n");
+            INT8 newPos = 0;
+            INT8 oldPos = 0;
+            WhiteAttackers &= bm;
+            newPos = getPiecesFromBitArray(WhiteAttackers);
+            for(UINT8 i = 15; i >= 0 ; i--)
+            {
+                if (blackReach[i] & bitPos[newPos])
+                {
+                    oldPos = i;
+                    break;
+                }
+            }
+            if ((WhiteAttackers & ~bitPos[newPos]) == 0)
+            {
+                whitePieces &= ~bitPos[newPos];
+                board[newPos]->type = OUT;
+                moveBlackPiece(oldPos, newPos);
+                return true;
+            }
+        }
         if (blackReach[bpArray[0].id] & ~wm & ~blackPieces & whitePieces)
         {
             printf("0.1\n");

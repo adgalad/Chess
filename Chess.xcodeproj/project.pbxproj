@@ -118,12 +118,12 @@
 			children = (
 				0710D1D81A46A51A00A4EE9E /* SDL_mixer.framework */,
 				07BA81C31A46A1BC009CABFF /* SDL.framework */,
-				0710806C1A46965E00A8FF5B /* info.plist */,
 				071080681A468F7600A8FF5B /* SDL_image.framework */,
 				07EBBD741A3CA62900BD8978 /* OpenGL.framework */,
 				07EBBD721A3CA62400BD8978 /* Cocoa.framework */,
 				07AC0EB41A2A4D3300418DA2 /* Chess */,
 				07AC0EB31A2A4D3300418DA2 /* Products */,
+				0710806C1A46965E00A8FF5B /* info.plist */,
 			);
 			sourceTree = "<group>";
 		};
