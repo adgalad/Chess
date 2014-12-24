@@ -55,6 +55,8 @@ void ChessBoard::moveBlackPiece(UINT8 oldPos, UINT8 newPos)
     blackPieces &= ~bitPos[oldPos];
     blackPieces |= bitPos[newPos];
     board[newPos] = board[oldPos];
+    printf("Son nulos: NewPos = %d oldPos = %d \n", newPos,oldPos);
+    board[oldPos] = NULL;
     board[newPos]->pos = newPos;
     board[newPos]->bit = bitPos[newPos];
     board[newPos]->x = newPos%BSIZE;
@@ -90,7 +92,7 @@ bool ChessBoard::cPlayerMv()
             {
                 if (blackReach[i] & bitPos[newPos])
                 {
-                    oldPos = i;
+                    oldPos = bpArray[i].pos;
                     break;
                 }
             }
@@ -121,6 +123,7 @@ bool ChessBoard::cPlayerMv()
         else if (blackReach[bpArray[0].id] & ~wm & ~blackPieces)
         {
             printf("0.2\n");
+            imprimir(wm,0 , -1, -1);
             UINT64 nextMv = blackReach[bpArray[0].id] & ~wm & ~blackPieces;
             INT8 newPos = 0;
             while (!(nextMv & 1))
@@ -143,8 +146,6 @@ bool ChessBoard::cPlayerMv()
         UINT8 oldPos = getPiecesFromBitArray(nextMv);
         UINT8 newPos =0;
         UINT64 auxPos = blackReach[board[oldPos]->id];
-        imprimir(auxPos, whitePieces|blackPieces, 1, 1);
-        printf("oldpos %d\n",oldPos);
         if (auxPos & ~wm)
         {
             if (auxPos & whitePieces & ~wm & ~blackPieces)
@@ -158,6 +159,7 @@ bool ChessBoard::cPlayerMv()
                         newPos++;
                         nextMv >>=1;
                     }
+                    
                     whitePieces &= ~bitPos[newPos];
                     board[newPos]->type = OUT;
                 }
@@ -183,6 +185,9 @@ bool ChessBoard::cPlayerMv()
                     newPos++;
                     nextMv >>=1;
                 }
+            }
+            else {
+                printf("1.3.1 No aplica \n");
             }
         }
         else
@@ -224,13 +229,14 @@ bool ChessBoard::cPlayerMv()
             }
             else
              {
+                 printf("1.7 No aplica\n");
                 ///- Buscar si hay otra pieza amenazada
                 //- Revisar que otras piezas puedan moverse para resguardarla
              }
              
             
         }
-        if (newPos)
+        if (newPos >= 0)
         {
             moveBlackPiece(oldPos, newPos);
             return true;
@@ -246,17 +252,13 @@ bool ChessBoard::cPlayerMv()
             newPos++;
             nextMv >>=1;
         }
-        imprimir(whitePieces & bm & ~wm, blackPieces|whitePieces, 0, 0);
-        printf("(%d,%d) \n",newPos%8,newPos/8);
         for (INT8 oldPos = 0; oldPos < BSIZE*2; oldPos++)
         {
             if (blackReach[oldPos] & bitPos[newPos])
             {
                 oldPos = bpArray[oldPos].y*8 + bpArray[oldPos].x;
                 printf("(%d,%d) => (%d,%d)\n",oldPos%8,oldPos/8,newPos%8,newPos/8);
-                blackPieces &= ~bitPos[oldPos];
-                blackPieces |= bitPos[newPos];
-                if (board[newPos] != NULL)
+                if (whitePieces & bitPos[newPos])
                 {
                     whitePieces &= ~bitPos[newPos];
                     board[newPos]->type = OUT;

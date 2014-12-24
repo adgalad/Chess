@@ -81,6 +81,7 @@ bool GameInterface::eventGame()
                     
                     mainBoard.str[2] = (event.motion.x-44)/68;
                     mainBoard.str[3] = (event.motion.y-43)/68;
+                    
                     if (mainBoard.playerMv())
                     {
                         pickedPiece = -1;
