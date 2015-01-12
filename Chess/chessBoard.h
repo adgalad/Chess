@@ -11,6 +11,7 @@
 
 #include "chessPiece.h"
 
+
 vector<INT8*> vectorMvInit(); // Vector initializer funtion
 
 void imprimir(UINT64 mv, UINT64 board, INT8  x, INT8  y);// Auxiliar function

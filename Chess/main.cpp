@@ -18,6 +18,5 @@ int SDL_main(int argc, char **argv)
         game = GameInterface();
         game.executeGame();
     }while(game.newGame);
-    
     return 0;
 }

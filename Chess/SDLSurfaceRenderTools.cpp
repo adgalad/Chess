@@ -23,15 +23,40 @@ SDL_Surface *Csurface::OnLoad(char* file)
     SDL_Surface *Surf,*Surf_Return;
     
     if ((Surf = IMG_Load(file))==NULL){
+        printf("Couldn't load image\n");
         return NULL;
-        
     }
-    printf("%s\n",file);
 
     Surf_Return = SDL_DisplayFormat(Surf);
     SDL_FreeSurface(Surf);
     return Surf_Return;
     
+}
+
+bool Csurface::OnDrawTTF(SDL_Surface *Surf_Dest,const char *font, int size,
+                         Uint8 R, Uint8 G,Uint8 B, const char *message, int X, int Y)
+{
+    if (Surf_Dest == NULL)
+    {
+        printf("Surf_Dest is empty\n");
+        return false;
+    }
+    TTF_Font *SDLfont = TTF_OpenFont(font, size);
+    if (SDLfont == NULL)
+    {
+        printf("couldn't load font\n");
+        return false;
+    }
+    SDL_Color color = {R,G,B,0};
+
+    SDL_Rect DestR;
+    
+    DestR.x = X;
+    DestR.y = Y;
+    
+    SDL_BlitSurface(TTF_RenderText_Blended(SDLfont,message, color), NULL, Surf_Dest, &DestR);
+    
+    return true;
 }
 
 bool Csurface::OnDraw(SDL_Surface* Surf_Dest, SDL_Surface* Surf_Src, int X, int Y) {

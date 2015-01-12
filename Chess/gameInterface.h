@@ -19,12 +19,13 @@ const UINT8 SDLPieceSurfacePosition[7] = {5,5,4,3,2,1,0};
 class GameInterface
 {
     
-    SDL_Surface *mainScreen;
+    SDL_Surface *mainScreen; // Application's main sdl surface
     ChessBoard  mainBoard;
     SDL_Event   event;
-    vector<SDL_Surface*> surfaceArray;
+    vector<SDL_Surface*> surfaceArray; // 0: board surface
+                                       // 1: pieces surface
     INT8 pickedPiece;  // needed to move pieces with the mouse
-    bool idle;
+    bool idle;         //  
     bool checkmate;
     Mix_Music *moveSound;
     

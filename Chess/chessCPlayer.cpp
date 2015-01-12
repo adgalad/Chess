@@ -68,9 +68,9 @@ bool ChessBoard::cPlayerMv()
 {
     UINT64 bm = getTotalReach(BLACK);
     UINT64 wm = getTotalReach(WHITE);
-    /*************/
-    /* MOVE MATE */
-    /*************/
+    /*******************/
+    /* MOVE CASA: JAQUE*/
+    /*******************/
     if (wm & bitPos[bpArray[0].pos])
     {
         UINT64 WhiteAttackers = 0;

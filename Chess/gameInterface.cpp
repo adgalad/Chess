@@ -8,8 +8,7 @@
 
 #include "gameInterface.h"
 
-
-
+int c = 0;
 GameInterface::GameInterface()
 {
     mainScreen = NULL;
@@ -23,6 +22,7 @@ void GameInterface::executeGame()
     if (initGame() == false)
     {
         printf("error\n");
+        exitGame();
     }
     bool run = true;
     renderGame();
@@ -148,6 +148,9 @@ bool GameInterface::renderGame()
                          (SDLPieceSurfacePosition[mainBoard.wpArray[pickedPiece].type-1])*68,
                          68, 68, 68);
     }
+    if (c < 1000) c++;
+    else c = 0;
+    Csurface::OnDrawTTF(mainScreen,"/Library/Fonts/Microsoft/Arial.ttf",30, 210,234,134,&std::to_string(c)[0], 0, 0);
     SDL_Flip(mainScreen);
     return true;
 }
@@ -180,6 +183,15 @@ bool GameInterface::initGame()
     /*Enable Music mixer */
     Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096);
     moveSound = Mix_LoadMUS("/Users/carlosspaggiari/Desktop/C-C++/PROYECTOS/Chess/Chess/Resource/moveSound.wav");
+    if (moveSound == NULL)
+    {
+        printf("Couldn't load sound\n");
+        return false;
+    }
+    if (TTF_Init() != 0){
+        printf("Couldn't load TTF\n");
+        return false;
+    }
     string img = path + "board.jpg";
     surfaceArray.push_back(Csurface::OnLoad(&img[0]));
     img = path + "pieces.png";
@@ -194,5 +206,6 @@ void GameInterface::exitGame()
     SDL_FreeSurface(mainScreen);
     Mix_FreeMusic(moveSound);
     Mix_CloseAudio();
+    TTF_Quit();
     SDL_Quit();
 }

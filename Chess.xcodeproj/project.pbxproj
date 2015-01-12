@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0701EE251A6364D900CC4A88 /* SDL_ttf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0701EE241A6364D900CC4A88 /* SDL_ttf.framework */; };
 		071080671A468F6000A8FF5B /* SDLMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 071080661A468F6000A8FF5B /* SDLMain.m */; };
 		0710806A1A468F7600A8FF5B /* SDL_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 071080681A468F7600A8FF5B /* SDL_image.framework */; };
 		0710D1D91A46A51A00A4EE9E /* SDL_mixer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0710D1D81A46A51A00A4EE9E /* SDL_mixer.framework */; };
@@ -35,6 +36,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0701EE241A6364D900CC4A88 /* SDL_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL_ttf.framework; path = ../../../../SDL_ttf.framework; sourceTree = "<group>"; };
+		0701EE261A636B1F00CC4A88 /* Arial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Arial.ttf; path = ../../../../../../../../Library/Fonts/Microsoft/Arial.ttf; sourceTree = "<group>"; };
 		071080601A468A3E00A8FF5B /* board.fla */ = {isa = PBXFileReference; lastKnownFileType = file; path = board.fla; sourceTree = "<group>"; };
 		071080611A468A3E00A8FF5B /* board.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = board.jpg; sourceTree = "<group>"; };
 		071080631A468A3E00A8FF5B /* pieces.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pieces.png; sourceTree = "<group>"; };
@@ -69,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0701EE251A6364D900CC4A88 /* SDL_ttf.framework in Frameworks */,
 				07BA81C41A46A1BC009CABFF /* SDL.framework in Frameworks */,
 				0710806A1A468F7600A8FF5B /* SDL_image.framework in Frameworks */,
 				0710D1D91A46A51A00A4EE9E /* SDL_mixer.framework in Frameworks */,
@@ -87,6 +91,7 @@
 				0710806D1A46969100A8FF5B /* Chess.icns */,
 				071080641A468A3E00A8FF5B /* pieces.psd */,
 				071080601A468A3E00A8FF5B /* board.fla */,
+				0701EE261A636B1F00CC4A88 /* Arial.ttf */,
 				071080611A468A3E00A8FF5B /* board.jpg */,
 				071080631A468A3E00A8FF5B /* pieces.png */,
 			);
@@ -116,6 +121,7 @@
 		07AC0EA91A2A4D3300418DA2 = {
 			isa = PBXGroup;
 			children = (
+				0701EE241A6364D900CC4A88 /* SDL_ttf.framework */,
 				0710D1D81A46A51A00A4EE9E /* SDL_mixer.framework */,
 				07BA81C31A46A1BC009CABFF /* SDL.framework */,
 				071080681A468F7600A8FF5B /* SDL_image.framework */,
@@ -329,6 +335,7 @@
 					/Users/carlosspaggiari,
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/SDL_mixer.framework/Versions/A/Frameworks",
+					/Library/Frameworkd,
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -343,6 +350,7 @@
 					/Users/carlosspaggiari,
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/SDL_mixer.framework/Versions/A/Frameworks",
+					/Library/Frameworkd,
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";

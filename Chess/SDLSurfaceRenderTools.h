@@ -11,6 +11,7 @@
 
 #include <SDL/SDL.h>
 #include "SDL_image/SDL_image.h"
+#include <SDL_ttf/SDL_ttf.h>
 #include <string>
 #include <time.h>
 
@@ -22,6 +23,8 @@ class Csurface
 public:
     Csurface();
     static SDL_Surface *OnLoad(char* file);
+    static bool OnDrawTTF(SDL_Surface *Surf_Dest,const char *font, int size,
+                          Uint8 R, Uint8 G,Uint8 B, const char *message, int X, int Y);
     static bool OnDraw(SDL_Surface *Surf_Dest, SDL_Surface *Surf_Src, int X, int Y);
     static bool OnDraw(SDL_Surface *Surf_Dest, SDL_Surface *Surf_Src, int X, int Y, int X2, int Y2, int W, int H);
     static bool Transparent(SDL_Surface* Surf_Dest, int R, int G, int B);

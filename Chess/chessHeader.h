@@ -21,12 +21,7 @@
 #include <SDL_image/SDL_image.h>
 #include <SDL/SDL_opengl.h>
 #include <SDL_mixer/SDL_mixer.h>
-
-
-
-
-
-
+#include <SDL_ttf/SDL_ttf.h>
 
 using namespace std;
 
@@ -46,7 +41,7 @@ const INT8 queenMv[16]    = {1,1,1,-1,-1,1,-1,-1,1,0,-1,0,0,1,0,-1};
 const INT8 kingMv[16]     = {1,1,1,-1,-1,1,-1,-1,1,0,-1,0,0,1,0,-1};
 const UINT8 blockedPath[8] = {0,7,0x7,0xff,0xf,0xf,0xff,0xff};
 const UINT64 bitPos[64] =
-{0x1,               0x2,               0x4,               0x8,
+   {0x1,               0x2,               0x4,               0x8,
     0x10,              0x20,              0x40,              0x80,
     0x100,             0x200,             0x400,             0x800,
     0x1000,            0x2000,            0x4000,            0x8000,
